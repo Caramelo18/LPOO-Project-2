@@ -8,4 +8,6 @@
     <string name="exit">Exit</string>
 
     <string name="title_activity_game">GameActivity</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
 </resources>
