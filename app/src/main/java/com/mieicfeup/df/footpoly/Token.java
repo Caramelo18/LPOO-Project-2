@@ -13,13 +13,15 @@ public class Token
 {
     private ImageView pino;
     private int index;
+    private int balance;
 
     public Token(ImageView token)
     {
         this.pino = token;
         this.index = 0;
         this.pino.setX(0);
-        this.pino.setY(40);
+        this.pino.setY(130);
+        this.balance = 5000;
     }
 
     public void increaseIndex(int inc)
@@ -35,29 +37,49 @@ public class Token
     private void updatePosition()
     {
         if(this.index >= 0 && this.index <= 5)
-            pino.setY(40);
+            pino.setY(130);
         else if(this.index >= 10 && this.index <= 15)
-            pino.setY(690);
+            pino.setY(780);
         else if(this.index == 6 || this.index == 19)
-            pino.setY(175);
+            pino.setY(265);
         else if(this.index == 7 || this.index == 18)
-            pino.setY(305);
+            pino.setY(395);
         else if(this.index == 8 || this.index == 17)
-            pino.setY(440);
+            pino.setY(530);
         else if(this.index == 9 || this.index == 16)
-            pino.setY(570);
+            pino.setY(660);
 
         if(this.index == 0 || (this.index >= 15 && this.index <= 19))
             pino.setX(0);
         else if(this.index >= 5 && this.index <= 10)
-            pino.setX(630);
+            pino.setX(650);
         else if(this.index == 1 || this.index == 14)
-            pino.setX(110);
+            pino.setX(130);
         else if(this.index == 2 || this.index == 13)
-            pino.setX(240);
+            pino.setX(260);
         else if(this.index == 3 || this.index == 12)
-            pino.setX(370);
+            pino.setX(390);
         else if(this.index == 4 || this.index == 11)
-            pino.setX(500);
+            pino.setX(520);
     }
+
+    public int getBalance()
+    {
+        return balance;
+    }
+
+    public boolean decBalance(int ammount)
+    {
+        if(ammount > this.balance)
+            return false;
+
+        this.balance -= ammount;
+        return true;
+    }
+
+    public void incBalance(int ammount)
+    {
+        this.balance += ammount;
+    }
+
 }

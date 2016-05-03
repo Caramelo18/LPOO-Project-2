@@ -10,4 +10,7 @@
     <string name="title_activity_game">GameActivity</string>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>
+
+    <string name="dialogBuy">Buy</string>
+    <string name="dialogNoBuy">No</string>
 </resources>

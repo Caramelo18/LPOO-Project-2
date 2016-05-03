@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -102,15 +103,35 @@ public class GameActivity extends AppCompatActivity {
         hide();
 
         ImageView tok = (ImageView) findViewById(R.id.pino);
-
+        final TextView playerBalance = (TextView) findViewById(R.id.playerBalance);
         final Token player = new Token(tok);
+        Token bot = new Token(tok);
         final Dice dice = new Dice();
+        final Table table = new Table();
+        final BuyStadiumDialog dialog = new BuyStadiumDialog();
+
+        table.getStadium(2).setOwner(bot);
+        table.getStadium(4).setOwner(bot);
+        table.getStadium(6).setOwner(bot);
 
         mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int movement = dice.rollDice();
                 player.increaseIndex(movement);
+                Stadium current = table.getStadium(movement);
+                dialog.setData(current, player);
+                if(current.getOwner() == null)
+                {
+                    dialog.show(getFragmentManager(), "buyStadium");
+                }
+                else if(current.getOwner() != player)
+                {
+                    player.decBalance(table.getRent(movement));
+                }
+
+                String bal = "Balance: " + String.valueOf(player.getBalance());
+                playerBalance.setText(bal);
             }
         });
 
