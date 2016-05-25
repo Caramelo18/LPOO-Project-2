@@ -58,14 +58,53 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Balance: 5000"
-                android:id="@+id/playerBalance"
-                android:layout_alignParentBottom="true"
-                android:textSize="30sp"
+                android:text="Player 1: 5000"
+                android:id="@+id/player1Balance"
+                android:textSize="20sp"
+                android:gravity="top"
                 android:textColor="@color/balanceColor"/>
 
-        </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Player 2: 5000"
+                android:id="@+id/player2Balance"
+                android:layout_marginTop="25dp"
+                android:textSize="20sp"
+                android:textColor="@color/balanceColor"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Player 3: 5000"
+                android:id="@+id/player3Balance"
+                android:gravity="right"
+                android:textSize="20sp"
+                android:textColor="@color/balanceColor"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Player 4: 5000"
+                android:id="@+id/player4Balance"
+                android:layout_marginTop="25dp"
+                android:gravity="right"
+                android:textSize="20sp"
+                android:textColor="@color/balanceColor"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="New Button"
+                android:id="@+id/button"
+                android:layout_alignParentBottom="true"
+                android:gravity="left"
+                android:width="20dp"/>
+
+        </RelativeLayout>
 
     </FrameLayout>
 

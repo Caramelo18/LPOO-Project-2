@@ -34,6 +34,11 @@ public class Token
         Log.w("Token Footpoly", message);
         updatePosition();
     }
+
+    public int getIndex()
+    {
+        return this.index;
+    }
     private void updatePosition()
     {
         if(this.index >= 0 && this.index <= 5)

@@ -103,23 +103,25 @@ public class GameActivity extends AppCompatActivity {
         hide();
 
         ImageView tok = (ImageView) findViewById(R.id.pino);
-        final TextView playerBalance = (TextView) findViewById(R.id.playerBalance);
+        final TextView playerBalance = (TextView) findViewById(R.id.player1Balance);
         final Token player = new Token(tok);
         Token bot = new Token(tok);
         final Dice dice = new Dice();
         final Table table = new Table();
         final BuyStadiumDialog dialog = new BuyStadiumDialog();
-
+/*
         table.getStadium(2).setOwner(bot);
         table.getStadium(4).setOwner(bot);
-        table.getStadium(6).setOwner(bot);
+        table.getStadium(6).setOwner(bot);*/
 
         mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int movement = dice.rollDice();
                 player.increaseIndex(movement);
-                Stadium current = table.getStadium(movement);
+                Stadium current = table.getStadium(player.getIndex());
+                if(current == null)
+                    return;
                 dialog.setData(current, player);
                 if(current.getOwner() == null)
                 {
