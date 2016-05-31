@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/table"
                 android:layout_gravity="center"
-                android:src="@drawable/table"/>
+                />
             
             <ImageView
                 android:layout_width="35dp"
@@ -102,31 +102,35 @@
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".25"
-                    android:text="New Button"
-                    android:id="@+id/button1" />
+                    android:text="@string/mortgage"
+                    android:textSize="13dp"
+                    android:id="@+id/mortgageButton" />
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".25"
-                    android:text="New Button"
-                    android:id="@+id/button2" />
+                    android:text="@string/buyStadium"
+                    android:textSize="13dp"
+                    android:id="@+id/buyStadiumButton" />
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".25"
-                    android:text="New Button"
-                    android:id="@+id/button3" />
+                    android:text="@string/upgradeStadium"
+                    android:textSize="13dp"
+                    android:id="@+id/upgradeStadiumButton" />
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".25"
-                    android:text="New Button"
-                    android:id="@+id/button4" />
+                    android:text="@string/endRound"
+                    android:textSize="13dp"
+                    android:id="@+id/endRoundButton" />
 
 
 

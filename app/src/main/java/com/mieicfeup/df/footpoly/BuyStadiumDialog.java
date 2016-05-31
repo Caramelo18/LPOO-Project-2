@@ -13,13 +13,13 @@ import android.util.Log;
 public class BuyStadiumDialog extends DialogFragment
 {
     private Stadium stadium;
-    private Token newOwner;
+    private Player newOwner;
     public BuyStadiumDialog()
     {
 
     }
 
-    public void setData(Stadium stadium, Token newOwner)
+    public void setData(Stadium stadium, Player newOwner)
     {
         this.stadium = stadium;
         this.newOwner = newOwner;

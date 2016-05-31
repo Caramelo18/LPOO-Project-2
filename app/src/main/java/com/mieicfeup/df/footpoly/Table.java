@@ -9,7 +9,6 @@ import java.util.LinkedHashMap;
  */
 public class Table
 {
- //   Stadium[] places = new Stadium[20];
     LinkedHashMap<Integer, Stadium> places = new LinkedHashMap();
 
     public Table()

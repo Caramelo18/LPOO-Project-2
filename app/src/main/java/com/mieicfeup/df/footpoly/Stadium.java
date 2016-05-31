@@ -5,7 +5,7 @@ package com.mieicfeup.df.footpoly;
  */
 public class Stadium
 {
-    private Token owner;
+    private Player owner;
     private String name;
     private String country;
     private int cost;
@@ -30,12 +30,12 @@ public class Stadium
         return name;
     }
 
-    public Token getOwner()
+    public Player getOwner()
     {
         return owner;
     }
 
-    public void setOwner(Token owner)
+    public void setOwner(Player owner)
     {
         this.owner = owner;
     }

@@ -12,6 +12,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
@@ -87,6 +92,29 @@ public class GameActivity extends AppCompatActivity {
         }
     };
 
+    private Player[] players;
+    private ImageView tableIm;
+    private Dice dice;
+    private Table table;
+    private int orderIndex;
+    private int currPlayer;
+
+    public void loadInterface()
+    {
+        /*Thread load = new Thread()
+        {
+            @Override
+            public void run()
+            {*/
+                tableIm = (ImageView) findViewById(R.id.table);
+                int tableID = GameActivity.this.getResources().getIdentifier("table", "drawable", GameActivity.this.getPackageName());
+                Integer id = tableID;
+
+                tableIm.setImageResource(tableID);
+       /*     }
+        };
+        load.start();*/
+    }
 
 
     @Override
@@ -102,38 +130,65 @@ public class GameActivity extends AppCompatActivity {
 
         hide();
 
+        loadInterface();
+
+        players = new Player[4];
+
         ImageView tok = (ImageView) findViewById(R.id.pino);
-        final TextView playerBalance = (TextView) findViewById(R.id.player1Balance);
-        final Token player = new Token(tok);
-        Token bot = new Token(tok);
-        final Dice dice = new Dice();
-        final Table table = new Table();
+        TextView player1Text = (TextView) findViewById(R.id.player1Balance);
+        players[0] = new Player(tok, player1Text, 1);
+
+        TextView player2Text = (TextView) findViewById(R.id.player2Balance);
+        players[1] = new Player(tok, player2Text, 2);
+
+        TextView player3Text = (TextView) findViewById(R.id.player3Balance);
+        players[2] = new Player(tok, player3Text, 3);
+
+        TextView player4Text = (TextView) findViewById(R.id.player4Balance);
+        players[3] = new Player(tok, player4Text, 4);
+
+        dice = new Dice();
+        table = new Table();
         final BuyStadiumDialog dialog = new BuyStadiumDialog();
-/*
-        table.getStadium(2).setOwner(bot);
-        table.getStadium(4).setOwner(bot);
-        table.getStadium(6).setOwner(bot);*/
+
+        // generates the playing order
+        final ArrayList<Integer> order = new ArrayList<>();
+        order.add(0);
+        order.add(1);
+        order.add(2);
+        order.add(3);
+        Collections.shuffle(order);
+
+        orderIndex = 0;
+        currPlayer = order.get(orderIndex);
 
         mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 int movement = dice.rollDice();
-                player.increaseIndex(movement);
-                Stadium current = table.getStadium(player.getIndex());
+                players[currPlayer].increaseIndex(movement);
+                Stadium current = table.getStadium(players[currPlayer].getIndex());
                 if(current == null)
                     return;
-                dialog.setData(current, player);
+                dialog.setData(current, players[currPlayer]);
                 if(current.getOwner() == null)
                 {
                     dialog.show(getFragmentManager(), "buyStadium");
+                    hide();
                 }
-                else if(current.getOwner() != player)
+                else if(current.getOwner() != players[currPlayer])
                 {
-                    player.decBalance(table.getRent(movement));
+                    players[currPlayer].decBalance(table.getRent(movement));
                 }
+                players[currPlayer].updateText();
 
-                String bal = "Balance: " + String.valueOf(player.getBalance());
-                playerBalance.setText(bal);
+                Log.w(String.valueOf(orderIndex), String.valueOf(currPlayer));
+                ++orderIndex;
+                if(orderIndex > 3)
+                    orderIndex = 0;
+                currPlayer = order.get(orderIndex);
+
             }
         });
 

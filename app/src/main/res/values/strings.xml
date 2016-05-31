@@ -13,4 +13,9 @@
 
     <string name="dialogBuy">Buy</string>
     <string name="dialogNoBuy">No</string>
+
+    <string name="mortgage">Mortgage</string>
+    <string name="buyStadium">Buy Stadium</string>
+    <string name="upgradeStadium">Upgrade Stadium</string>
+    <string name="endRound">End Round</string>
 </resources>
