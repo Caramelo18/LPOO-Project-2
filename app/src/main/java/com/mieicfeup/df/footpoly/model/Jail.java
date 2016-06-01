@@ -1,4 +1,4 @@
-package com.mieicfeup.df.footpoly;
+package com.mieicfeup.df.footpoly.model;
 
 import java.util.ArrayList;
 

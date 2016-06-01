@@ -1,6 +1,4 @@
-package com.mieicfeup.df.footpoly;
-
-import android.util.Log;
+package com.mieicfeup.df.footpoly.model;
 
 import java.util.LinkedHashMap;
 

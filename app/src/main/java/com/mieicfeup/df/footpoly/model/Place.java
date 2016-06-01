@@ -1,4 +1,4 @@
-package com.mieicfeup.df.footpoly;
+package com.mieicfeup.df.footpoly.model;
 
 import java.io.Serializable;
 
@@ -7,6 +7,5 @@ import java.io.Serializable;
  */
 public abstract class Place implements Serializable
 {
-
     public abstract boolean trigger(Player player);
 }

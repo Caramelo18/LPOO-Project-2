@@ -1,4 +1,4 @@
-package com.mieicfeup.df.footpoly;
+package com.mieicfeup.df.footpoly.model;
 
 /**
  * Created by fabio on 01/05/2016.

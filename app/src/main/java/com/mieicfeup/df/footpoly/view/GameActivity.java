@@ -1,21 +1,17 @@
-package com.mieicfeup.df.footpoly;
+package com.mieicfeup.df.footpoly.view;
 
 import android.annotation.SuppressLint;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.Collections;
+import com.mieicfeup.df.footpoly.R;
+import com.mieicfeup.df.footpoly.model.Dice;
+import com.mieicfeup.df.footpoly.model.Game;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -92,10 +88,9 @@ public class GameActivity extends AppCompatActivity {
         }
     };
 
-    private Player[] players;
-    private ImageView tableIm;
+    private Game game;
     private Dice dice;
-    private Table table;
+    private ImageView tableIm;
     private int orderIndex;
     private int currPlayer;
 
@@ -127,70 +122,10 @@ public class GameActivity extends AppCompatActivity {
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
 
-
         hide();
 
         loadInterface();
 
-        players = new Player[4];
-
-        ImageView tok = (ImageView) findViewById(R.id.pino);
-        TextView player1Text = (TextView) findViewById(R.id.player1Balance);
-        players[0] = new Player(tok, player1Text, 1);
-
-        TextView player2Text = (TextView) findViewById(R.id.player2Balance);
-        players[1] = new Player(tok, player2Text, 2);
-
-        TextView player3Text = (TextView) findViewById(R.id.player3Balance);
-        players[2] = new Player(tok, player3Text, 3);
-
-        TextView player4Text = (TextView) findViewById(R.id.player4Balance);
-        players[3] = new Player(tok, player4Text, 4);
-
-        dice = new Dice();
-        table = new Table();
-        final BuyStadiumDialog dialog = new BuyStadiumDialog();
-
-        // generates the playing order
-        final ArrayList<Integer> order = new ArrayList<>();
-        order.add(0);
-        order.add(1);
-        order.add(2);
-        order.add(3);
-        Collections.shuffle(order);
-
-        orderIndex = 0;
-        currPlayer = order.get(orderIndex);
-
-        mContentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                int movement = dice.rollDice();
-                players[currPlayer].increaseIndex(movement);
-                Stadium current = table.getStadium(players[currPlayer].getIndex());
-                if(current == null) // remover quando tiver as cartas todas
-                    return;
-                dialog.setData(current, players[currPlayer]);
-                if(current.getOwner() == null)
-                {
-                    dialog.show(getFragmentManager(), "buyStadium");
-                    hide();
-                }
-                else if(current.getOwner() != players[currPlayer])
-                {
-                    players[currPlayer].decBalance(table.getRent(movement));
-                    players[currPlayer].updateText();
-                }
-
-                Log.w(String.valueOf(orderIndex), String.valueOf(currPlayer));
-                ++orderIndex;
-                if(orderIndex > 3)
-                    orderIndex = 0;
-                currPlayer = order.get(orderIndex);
-
-            }
-        });
 
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away

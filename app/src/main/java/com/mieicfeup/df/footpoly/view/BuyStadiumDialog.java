@@ -1,11 +1,14 @@
-package com.mieicfeup.df.footpoly;
+package com.mieicfeup.df.footpoly.view;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
+
+import com.mieicfeup.df.footpoly.R;
+import com.mieicfeup.df.footpoly.model.Player;
+import com.mieicfeup.df.footpoly.model.Stadium;
 
 /**
  * Created by fabio on 02/05/2016.

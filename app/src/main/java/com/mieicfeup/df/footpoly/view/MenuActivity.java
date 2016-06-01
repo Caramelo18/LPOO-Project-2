@@ -1,4 +1,4 @@
-package com.mieicfeup.df.footpoly;
+package com.mieicfeup.df.footpoly.view;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
-import static android.content.ClipData.newIntent;
+import com.mieicfeup.df.footpoly.R;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
