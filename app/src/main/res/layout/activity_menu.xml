@@ -45,35 +45,35 @@
             android:layout_gravity="center">
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:theme="@style/Button"
                 android:text="@string/play"
                 android:id="@+id/playButton"
                 android:layout_gravity="center"
-                android:background="#ffffff"
                 android:layout_marginTop="160dp"
                 android:layout_centerHorizontal="true" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:theme="@style/Button"
                 android:text="@string/options"
                 android:id="@+id/optionsButton"
                 android:layout_gravity="center"
                 android:layout_alignStart="@+id/playButton"
                 android:layout_below="@+id/playButton"
-                android:background="#ffffff"
                 android:layout_marginTop="15dp" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:theme="@style/Button"
                 android:text="@string/exit"
                 android:id="@+id/exitButton"
                 android:layout_gravity="center"
                 android:layout_alignStart="@+id/playButton"
                 android:layout_below="@+id/optionsButton"
-                android:background="#ffffff"
                 android:layout_marginTop="15dp" />
         </RelativeLayout>
     </FrameLayout>

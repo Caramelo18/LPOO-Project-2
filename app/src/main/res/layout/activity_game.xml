@@ -104,6 +104,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".25"
+                    android:theme="@style/Button"
                     android:text="@string/mortgage"
                     android:textSize="13dp"
                     android:id="@+id/mortgageButton" />
@@ -112,6 +113,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".25"
+                    android:theme="@style/Button"
                     android:text="@string/buyStadium"
                     android:textSize="13dp"
                     android:id="@+id/buyStadiumButton" />
@@ -120,6 +122,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".25"
+                    android:theme="@style/Button"
                     android:text="@string/upgradeStadium"
                     android:textSize="13dp"
                     android:id="@+id/upgradeStadiumButton" />
@@ -128,6 +131,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".25"
+                    android:theme="@style/Button"
                     android:text="@string/endRound"
                     android:textSize="13dp"
                     android:id="@+id/endRoundButton" />

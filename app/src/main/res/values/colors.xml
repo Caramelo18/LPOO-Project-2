@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008919</color>
-    <color name="colorPrimaryDark">#017015</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#424242</color>
+    <color name="colorPrimaryDark">#212121</color>
+    <color name="colorAccent">#F5F5F5</color>
+
+    <color name="buttonColor">#F5F5F5</color>
+    <color name="buttonTextColor">#212121</color>
 
     <color name="black_overlay">#66000000</color>
     <color name="balanceColor">#ffffff</color>
