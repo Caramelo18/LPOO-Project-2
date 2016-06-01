@@ -29,13 +29,14 @@ public class BuyStadiumDialog extends DialogFragment
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        String message = "Would you like to buy " + stadium.getName() + "?";
+        String message = "Player " + newOwner.getNumber() +  ", would you like to buy " + stadium.getName() + "?";
         builder.setMessage(message)
                 .setPositiveButton(R.string.dialogBuy, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         stadium.setOwner(newOwner);
                         newOwner.decBalance(stadium.getCost());
+                        newOwner.updateText();
                     }
                 })
                 .setNegativeButton(R.string.dialogNoBuy, new DialogInterface.OnClickListener() {

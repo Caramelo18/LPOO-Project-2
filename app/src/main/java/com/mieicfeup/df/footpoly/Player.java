@@ -104,4 +104,9 @@ public class Player
         text.setText(newText);
     }
 
+    public int getNumber()
+    {
+        return number;
+    }
+
 }

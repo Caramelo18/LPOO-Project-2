@@ -169,7 +169,7 @@ public class GameActivity extends AppCompatActivity {
                 int movement = dice.rollDice();
                 players[currPlayer].increaseIndex(movement);
                 Stadium current = table.getStadium(players[currPlayer].getIndex());
-                if(current == null)
+                if(current == null) // remover quando tiver as cartas todas
                     return;
                 dialog.setData(current, players[currPlayer]);
                 if(current.getOwner() == null)
@@ -180,8 +180,8 @@ public class GameActivity extends AppCompatActivity {
                 else if(current.getOwner() != players[currPlayer])
                 {
                     players[currPlayer].decBalance(table.getRent(movement));
+                    players[currPlayer].updateText();
                 }
-                players[currPlayer].updateText();
 
                 Log.w(String.valueOf(orderIndex), String.valueOf(currPlayer));
                 ++orderIndex;
