@@ -3,26 +3,26 @@ package com.mieicfeup.df.footpoly;
 /**
  * Created by fabio on 01/05/2016.
  */
-public class Stadium
+public class Stadium extends Place
 {
     private Player owner;
     private String name;
     private String country;
     private int cost;
     private int rent;
-    private int houseRent;
-    private int hotelRent;
-    private boolean house;
-    private boolean hotel;
+    private int upgradeCost;
+    private int upgradeLevel;
+    private boolean mortgaged;
 
-    public Stadium(String name, String country, int cost, int rent, int houseRent, int hotelRent)
+    public Stadium(String name, String country, int cost, int rent)
     {
         this.name = name;
         this.country = country;
         this.cost = cost;
         this.rent = rent;
-        this.houseRent = houseRent;
-        this.hotelRent = hotelRent;
+        this.upgradeCost = (int) Math.round(cost * 0.8);
+        this.upgradeLevel = 0;
+        this.mortgaged = false;
     }
 
     public String getName()
@@ -30,14 +30,9 @@ public class Stadium
         return name;
     }
 
-    public Player getOwner()
+    public String getCountry()
     {
-        return owner;
-    }
-
-    public void setOwner(Player owner)
-    {
-        this.owner = owner;
+        return country;
     }
 
     public int getCost()
@@ -47,22 +42,59 @@ public class Stadium
 
     public int getRent()
     {
-        if(!house && !hotel)
-            return rent;
+        if(this.mortgaged)
+            return 0;
 
-        else if(house)
-            return houseRent;
+        return (this.rent + (this.rent * this.upgradeLevel));
+    }
 
-        else
-            return hotelRent;
+    public Player getOwner()
+    {
+        return owner;
+    }
+
+    public boolean getMortgaged()
+    {
+        return this.mortgaged;
+    }
+
+    public void setOwner(Player owner)
+    {
+        this.owner = owner;
     }
 
     public void upgradeStadium()
     {
-        if(!house && !hotel)
-            house = true;
+        if(this.upgradeLevel < 2)
+        {
+            ++this.upgradeLevel;
+            owner.decBalance(this.upgradeCost);
+        }
+    }
 
-        else if(house)
-            hotel = true;
+    public void setMortgaged()
+    {
+        if(this.mortgaged)
+        {
+            owner.decBalance(this.cost);
+            this.mortgaged = false;
+        }
+        else
+        {
+            owner.incBalance(this.cost);
+            this.mortgaged = true;
+        }
+    }
+
+    public boolean trigger(Player player)
+    {
+        if(this.owner == player || this.owner == null)
+            return true;
+
+        int ammount = this.getRent();
+        if(!player.decBalance(ammount))
+            return false;
+        owner.incBalance(ammount);
+        return true;
     }
 }
