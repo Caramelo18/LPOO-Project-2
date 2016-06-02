@@ -25,4 +25,14 @@
         <item name="android:background">@color/black_overlay</item>
     </style>
 
+    <style name="PlayerListStyle" parent="Widget.AppCompat.ListView">
+        <item name="android:background">@color/listViewBackground</item>
+        <item name="android:divider">@color/listViewDivider</item>
+        <item name="android:dividerHeight">1dp</item>
+        <item name="android:textColor">@color/listViewText</item>
+        <item name="android:cacheColorHint">@color/listViewText</item>
+        <item name="android:checkboxStyle">@style/Widget.AppCompat.CompoundButton.CheckBox</item>
+
+    </style>
+
 </resources>
