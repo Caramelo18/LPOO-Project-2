@@ -1,6 +1,7 @@
 package com.mieicfeup.df.footpoly.view;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -8,15 +9,20 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.mieicfeup.df.footpoly.R;
 
@@ -102,7 +108,10 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
     private ListView playersList;
     private SeekBar players;
     private ArrayList<String> playersNames;
+    private ArrayAdapter<String> adapter;
     private SparseBooleanArray checkedPlayers;
+    private EditText newName;
+    private int newNameIndex = -1;
 
 
     @Override
@@ -117,6 +126,29 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
 
 
         hide();
+        newName = (EditText) findViewById(R.id.editText);
+        newName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                String name = newName.getText().toString();
+                newName.setVisibility(View.INVISIBLE);
+                newName.setText("");
+                // hides keyboard
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getWindow().getDecorView().getRootView().getWindowToken(),0);
+
+                if(newNameIndex != -1)
+                {
+                    playersNames.set(newNameIndex, name);
+                    adapter.notifyDataSetChanged();
+                    newNameIndex = -1;
+                }
+
+                hide();
+                return true;
+            }
+        });
+
         playButton = (Button) findViewById(R.id.playButton);
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +164,7 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
         playersNames.add("Player 1");
         playersNames.add("Player 2");
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked, playersNames);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked, playersNames);
         playersList.setAdapter(adapter);
 
         players = (SeekBar) findViewById(R.id.numPlayers);
@@ -160,11 +192,26 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
             }
         });
 
+        playersList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                newName.setVisibility(View.VISIBLE);
+                newName.setEnabled(true);
+                newName.requestFocus();
+
+                newNameIndex = (int) id;
+
+                // shows keyboard
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+                return true;
+            }
+        });
         playersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 checkedPlayers = playersList.getCheckedItemPositions();
-                Log.w("new listener", String.valueOf(checkedPlayers.get(0)));
             }
         });
 

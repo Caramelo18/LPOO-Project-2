@@ -60,18 +60,28 @@
                 android:id="@+id/numPlayers"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="60dp"
                 android:max="2"
                 android:minHeight="100dp"
                 android:minWidth="100dp"/>
 
             <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
                 android:id="@+id/playerList"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginLeft="120dp"/>
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="120dp"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText"
+                android:layout_marginTop="40dp"
+                android:layout_centerHorizontal="true"
+                android:visibility="invisible"
+                android:singleLine="true"/>
 
         </RelativeLayout>
     </FrameLayout>
