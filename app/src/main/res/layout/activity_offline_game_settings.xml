@@ -45,48 +45,34 @@
             android:layout_gravity="center">
 
             <Button
-                android:layout_width="100dp"
+                android:layout_width="160dp"
                 android:layout_height="60dp"
                 android:theme="@style/Button"
-                android:text="@string/offline"
-                android:id="@+id/offlineButton"
+                android:text="@string/play"
+                android:id="@+id/playButton"
                 android:layout_gravity="center"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="350dp"
                 android:layout_centerHorizontal="true" />
 
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="60dp"
-                android:theme="@style/Button"
-                android:text="@string/online"
-                android:id="@+id/onlineButton"
-                android:layout_gravity="center"
-                android:layout_alignStart="@+id/offlineButton"
-                android:layout_below="@+id/offlineButton"
-                android:layout_marginTop="15dp" />
+            <SeekBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/numPlayers"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="100dp"
+                android:max="2"
+                android:minHeight="100dp"
+                android:minWidth="100dp"/>
 
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/playerList"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="120dp"/>
 
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="60dp"
-                android:theme="@style/Button"
-                android:text="@string/options"
-                android:id="@+id/optionsButton"
-                android:layout_gravity="center"
-                android:layout_alignStart="@+id/onlineButton"
-                android:layout_below="@+id/onlineButton"
-                android:layout_marginTop="15dp" />
-
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="60dp"
-                android:theme="@style/Button"
-                android:text="@string/exit"
-                android:id="@+id/exitButton"
-                android:layout_gravity="center"
-                android:layout_alignStart="@+id/optionsButton"
-                android:layout_below="@+id/optionsButton"
-                android:layout_marginTop="15dp" />
         </RelativeLayout>
     </FrameLayout>
 

@@ -3,9 +3,13 @@
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="play">Play</string>
+
+    <string name="offline">Play Offline</string>
+    <string name="online">Play Online</string>
     <string name="options">Options</string>
     <string name="exit">Exit</string>
+
+    <string name="play">Play</string>
 
     <string name="title_activity_game">GameActivity</string>
 
@@ -18,4 +22,6 @@
     <string name="buyStadium">Buy Stadium</string>
     <string name="upgradeStadium">Upgrade Stadium</string>
     <string name="endRound">End Round</string>
+
+    <string name="title_activity_offline_game_settings">OfflineGameSettingsActivity</string>
 </resources>
