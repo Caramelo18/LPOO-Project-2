@@ -13,7 +13,10 @@ import android.widget.ImageView;
 
 import com.mieicfeup.df.footpoly.R;
 import com.mieicfeup.df.footpoly.controller.GameController;
+import com.mieicfeup.df.footpoly.controller.PlayerController;
 import com.mieicfeup.df.footpoly.model.Game;
+
+import java.util.ArrayList;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -92,6 +95,8 @@ public class GameActivity extends AppCompatActivity {
 
     private ImageView tableIm;
 
+    private ArrayList<ImageView> playerImages;
+
     private Button mortgageButton;
     private Button buyStadiumButton;
     private Button upgradeStadiumButton;
@@ -103,10 +108,15 @@ public class GameActivity extends AppCompatActivity {
     public void loadInterface()
     {
         tableIm = (ImageView) findViewById(R.id.table);
-        int tableID = GameActivity.this.getResources().getIdentifier("table", "drawable", GameActivity.this.getPackageName());
+        /*int tableID = GameActivity.this.getResources().getIdentifier("table", "drawable", GameActivity.this.getPackageName());
         Integer id = tableID;
 
-        tableIm.setImageResource(tableID);
+        tableIm.setImageResource(tableID);*/
+
+        playerImages = new ArrayList<ImageView>();
+
+        for (PlayerController Player : gameController.getPlayerList()) {
+        }
 
         mortgageButton = (Button) findViewById(R.id.mortgageButton);
 

@@ -35,116 +35,136 @@
             android:background="@color/black_overlay"
             android:orientation="horizontal"
             tools:ignore="UselessParent">
-
-
         </LinearLayout>
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp">
 
-        <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/table"
                 android:layout_gravity="center"
-               />
-            
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="55dp"
-                android:id="@+id/pino"
-                android:src="@drawable/pino"/>
+                android:src="@drawable/table" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Player 1: 5000"
-                android:id="@+id/player1Balance"
-                android:textSize="20sp"
-                android:gravity="top"
-                android:textColor="@color/balanceColor"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Player 2: 5000"
-                android:id="@+id/player2Balance"
-                android:layout_marginTop="25dp"
-                android:textSize="20sp"
-                android:textColor="@color/balanceColor"/>
-
-            <TextView
+            <GridLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Player 3: 5000"
-                android:id="@+id/player3Balance"
-                android:gravity="right"
-                android:textSize="20sp"
-                android:textColor="@color/balanceColor"/>
+                android:layout_height="match_parent"
+                android:rowCount="6"
+                android:columnCount="6">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Player 4: 5000"
-                android:id="@+id/player4Balance"
-                android:layout_marginTop="25dp"
-                android:gravity="right"
-                android:textSize="20sp"
-                android:textColor="@color/balanceColor"/>
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="55dp"
+                    android:id="@+id/pino1"
+                    android:src="@drawable/pino1"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_alignParentBottom="true">
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="55dp"
+                    android:id="@+id/pino2"
+                    android:src="@drawable/pino2"/>
 
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".25"
-                    android:theme="@style/Button"
-                    android:text="@string/mortgage"
-                    android:textSize="13dp"
-                    android:id="@+id/mortgageButton" />
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="55dp"
+                    android:id="@+id/pino3"
+                    android:src="@drawable/pino3"/>
 
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".25"
-                    android:theme="@style/Button"
-                    android:text="@string/buyStadium"
-                    android:textSize="13dp"
-                    android:id="@+id/buyStadiumButton" />
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="55dp"
+                    android:id="@+id/pino4"
+                    android:src="@drawable/pino4"/>
 
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".25"
-                    android:theme="@style/Button"
-                    android:text="@string/upgradeStadium"
-                    android:textSize="13dp"
-                    android:id="@+id/upgradeStadiumButton" />
-
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".25"
-                    android:theme="@style/Button"
-                    android:text="@string/endRound"
-                    android:textSize="13dp"
-                    android:id="@+id/endRoundButton" />
-
-
-
-
-
-
-            </LinearLayout>
-
-
+            </GridLayout>
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_gravity="bottom"
+            android:id="@+id/linearLayout">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".25"
+                android:theme="@style/Button"
+                android:text="@string/mortgage"
+                android:textSize="13dp"
+                android:id="@+id/mortgageButton" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".25"
+                android:theme="@style/Button"
+                android:text="@string/buyStadium"
+                android:textSize="13dp"
+                android:id="@+id/buyStadiumButton" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".25"
+                android:theme="@style/Button"
+                android:text="@string/upgradeStadium"
+                android:textSize="13dp"
+                android:id="@+id/upgradeStadiumButton" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".25"
+                android:theme="@style/Button"
+                android:text="@string/endRound"
+                android:textSize="13dp"
+                android:id="@+id/endRoundButton" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Player 1: 5000"
+            android:id="@+id/player1Balance"
+            android:textSize="20sp"
+            android:gravity="top"
+            android:textColor="@color/balanceColor"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Player 2: 5000"
+            android:id="@+id/player2Balance"
+            android:layout_marginTop="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/balanceColor"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Player 3: 5000"
+            android:id="@+id/player3Balance"
+            android:gravity="right"
+            android:textSize="20sp"
+            android:textColor="@color/balanceColor"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Player 4: 5000"
+            android:id="@+id/player4Balance"
+            android:layout_marginTop="25dp"
+            android:gravity="right"
+            android:textSize="20sp"
+            android:textColor="@color/balanceColor"/>
 
     </FrameLayout>
 

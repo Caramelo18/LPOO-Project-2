@@ -3,6 +3,7 @@ package com.mieicfeup.df.footpoly.controller;
 import com.mieicfeup.df.footpoly.model.Game;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Diogo on 01/06/2016.
@@ -24,6 +25,8 @@ public class GameController {
         for (int i = 0; i < game.getPlayers().size(); i++) {
             playerList.add(i, new PlayerController(game.getPlayers().get(i)));
         }
+
+        Collections.shuffle(playerList);
     }
 
     /**

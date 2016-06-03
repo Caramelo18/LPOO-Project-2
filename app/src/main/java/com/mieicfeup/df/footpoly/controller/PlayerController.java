@@ -1,6 +1,7 @@
 package com.mieicfeup.df.footpoly.controller;
 
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.mieicfeup.df.footpoly.model.Player;
 
@@ -9,6 +10,7 @@ import com.mieicfeup.df.footpoly.model.Player;
  */
 public class PlayerController {
     Player player;
+    ImageView playerImage;
 
     public PlayerController(Player player) {
         this.player = player;
@@ -18,6 +20,13 @@ public class PlayerController {
      */
     public Player getPlayer() {
         return this.player;
+    }
+
+    /**
+     * @param playerImage
+     */
+    public void setImage(ImageView playerImage) {
+        this.playerImage = playerImage;
     }
 
     public void increaseIndex(int inc)
