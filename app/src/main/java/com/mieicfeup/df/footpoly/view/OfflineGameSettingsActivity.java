@@ -106,7 +106,7 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
     private SeekBar players;
     private ArrayList<String> playersNames;
     private ArrayAdapter<String> adapter;
-    private SparseBooleanArray checkedPlayers;
+    private SparseBooleanArray humanPlayers;
     private EditText newName;
     private int newNameIndex = -1;
 
@@ -164,6 +164,10 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked, playersNames);
         playersList.setAdapter(adapter);
 
+        humanPlayers = new SparseBooleanArray();
+        humanPlayers.put(0, true);
+        playersList.setItemChecked(0, true);
+
         players = (SeekBar) findViewById(R.id.numPlayers);
 
         players.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -208,7 +212,7 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
         playersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                checkedPlayers = playersList.getCheckedItemPositions();
+                humanPlayers = playersList.getCheckedItemPositions();
             }
         });
 
@@ -283,7 +287,7 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
 
     public void launchGame(View view)
     {
-        Game game = new Game(playersNames, checkedPlayers);
+        Game game = new Game(playersNames, humanPlayers);
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra("game", game);
         this.startActivity(intent);
