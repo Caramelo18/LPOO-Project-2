@@ -1,5 +1,7 @@
 package com.mieicfeup.df.footpoly.model;
 
+import android.util.SparseBooleanArray;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -14,9 +16,13 @@ public class Game implements Serializable {
     /**
      * Game Constructor
      */
-    public Game() {
+    public Game(ArrayList<String> playerNames, SparseBooleanArray checkedPlayers) {
         this.players = new ArrayList<Player>();
         this.table = new Table();
+
+        for (int i = 0; i < playerNames.size(); i++) {
+            players.add(new Player(playerNames.get(i), checkedPlayers.get(i)));
+        }
     }
 
     /**

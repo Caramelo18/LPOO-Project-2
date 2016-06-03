@@ -1,7 +1,6 @@
 package com.mieicfeup.df.footpoly.controller;
 
 import com.mieicfeup.df.footpoly.model.Game;
-import com.mieicfeup.df.footpoly.model.Player;
 
 import java.util.ArrayList;
 
@@ -9,22 +8,45 @@ import java.util.ArrayList;
  * Created by Diogo on 01/06/2016.
  */
 public class GameController {
-    int currentPlayer;
-    ArrayList<PlayerController> playerList ;
-    Game game;
+    private int currentPlayer;
+    private ArrayList<PlayerController> playerList;
+    private Game game;
 
     /**
      * Game controller constructor
-     * @param game game object
-     * @param players player list
+     * @param game
      */
-    public GameController(Game game, ArrayList<Player> players) {
+    public GameController(Game game) {
         this.game = game;
         this.currentPlayer = 0;
         this.playerList = new ArrayList<PlayerController>();
 
-        for (int i = 0; i < players.size(); i++) {
-            playerList.set(i, new PlayerController(players.get(i)));
+        for (int i = 0; i < game.getPlayers().size(); i++) {
+            playerList.add(i, new PlayerController(game.getPlayers().get(i)));
         }
+    }
+
+    /**
+     * @return players list
+     */
+    public ArrayList<PlayerController> getPlayerList() {
+        return playerList;
+    }
+
+    /**
+     * @return current player index
+     */
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    /**
+     * Updates currentPlayer to the next player
+     */
+    public void endTurn() {
+        if (currentPlayer == playerList.size() - 1)
+            currentPlayer = 0;
+        else
+            currentPlayer++;
     }
 }

@@ -3,10 +3,8 @@ package com.mieicfeup.df.footpoly.view;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
-import com.mieicfeup.df.footpoly.R;
 import com.mieicfeup.df.footpoly.model.Player;
 import com.mieicfeup.df.footpoly.model.Stadium;
 
@@ -31,8 +29,8 @@ public class BuyStadiumDialog extends DialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        String message = "Player " + newOwner.getNumber() +  ", would you like to buy " + stadium.getName() + "?";
+       AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        /*String message = "Player " + newOwner.getNumber() +  ", would you like to buy " + stadium.getName() + "?";
         builder.setMessage(message)
                 .setPositiveButton(R.string.dialogBuy, new DialogInterface.OnClickListener() {
                     @Override
@@ -47,7 +45,7 @@ public class BuyStadiumDialog extends DialogFragment
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
-                });
+                });*/
         return builder.create();
     }
 }

@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.mieicfeup.df.footpoly.R;
-import com.mieicfeup.df.footpoly.model.Dice;
+import com.mieicfeup.df.footpoly.controller.GameController;
 import com.mieicfeup.df.footpoly.model.Game;
 
 /**
@@ -88,27 +90,36 @@ public class GameActivity extends AppCompatActivity {
         }
     };
 
-    private Game game;
-    private Dice dice;
     private ImageView tableIm;
+
+    private Button mortgageButton;
+    private Button buyStadiumButton;
+    private Button upgradeStadiumButton;
+    private Button endRoundButton;
+
+    private GameController gameController;
     private int orderIndex;
-    private int currPlayer;
 
     public void loadInterface()
     {
-        /*Thread load = new Thread()
-        {
-            @Override
-            public void run()
-            {*/
-                tableIm = (ImageView) findViewById(R.id.table);
-                int tableID = GameActivity.this.getResources().getIdentifier("table", "drawable", GameActivity.this.getPackageName());
-                Integer id = tableID;
+        tableIm = (ImageView) findViewById(R.id.table);
+        int tableID = GameActivity.this.getResources().getIdentifier("table", "drawable", GameActivity.this.getPackageName());
+        Integer id = tableID;
 
-                tableIm.setImageResource(tableID);
-       /*     }
-        };
-        load.start();*/
+        tableIm.setImageResource(tableID);
+
+        mortgageButton = (Button) findViewById(R.id.mortgageButton);
+
+        buyStadiumButton = (Button) findViewById(R.id.buyStadiumButton);
+
+        upgradeStadiumButton = (Button) findViewById(R.id.upgradeStadiumButton);
+
+        endRoundButton = (Button) findViewById(R.id.endRoundButton);
+        endRoundButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                gameController.endTurn();
+            }
+        });
     }
 
 
@@ -121,6 +132,12 @@ public class GameActivity extends AppCompatActivity {
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
+
+        Game game = (Game) getIntent().getSerializableExtra("game");
+        this.gameController = new GameController(game);
+
+        Log.w("Size", Integer.toString(gameController.getPlayerList().size()));
+        Log.w("Player", gameController.getPlayerList().get(0).getPlayer().getName());
 
         hide();
 

@@ -1,12 +1,12 @@
 package com.mieicfeup.df.footpoly.model;
 
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 
 /**
  * Created by fabio on 01/05/2016.
  */
-public class Table
-{
+public class Table implements Serializable {
     LinkedHashMap<Integer, Place> places = new LinkedHashMap();
 
     public Table()

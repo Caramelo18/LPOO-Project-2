@@ -3,28 +3,25 @@ package com.mieicfeup.df.footpoly.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.SparseBooleanArray;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.mieicfeup.df.footpoly.R;
+import com.mieicfeup.df.footpoly.model.Game;
 
 import java.util.ArrayList;
 
@@ -277,9 +274,18 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        hide();
+    }
+
     public void launchGame(View view)
     {
+        Game game = new Game(playersNames, checkedPlayers);
         Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("game", game);
         this.startActivity(intent);
     }
 }
