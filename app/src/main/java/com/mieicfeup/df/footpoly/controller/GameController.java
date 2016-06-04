@@ -2,6 +2,7 @@ package com.mieicfeup.df.footpoly.controller;
 
 import android.util.Log;
 
+import com.mieicfeup.df.footpoly.model.Dice;
 import com.mieicfeup.df.footpoly.model.Game;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class GameController {
     private int currentPlayer;
     private ArrayList<PlayerController> playerList;
     private Game game;
+    private Dice dice;
 
     /**
      * Game controller constructor
@@ -21,6 +23,7 @@ public class GameController {
      */
     public GameController(Game game) {
         this.game = game;
+        this.dice = new Dice();
         this.currentPlayer = 0;
         this.playerList = new ArrayList<PlayerController>();
 
@@ -54,6 +57,10 @@ public class GameController {
         else
             currentPlayer++;
 
-        this.playerList.get(currentPlayer).increaseIndex(1);
+        int rollValue = dice.rollDice();
+
+        Log.w("Roll Value", Integer.toString(rollValue));
+
+        this.playerList.get(currentPlayer).movePlayer(rollValue);
     }
 }

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
+    android:background="@drawable/background"
     tools:context=".view.GameActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
@@ -20,10 +20,10 @@
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical">
 
         <LinearLayout
             android:id="@+id/fullscreen_content_controls"
@@ -36,50 +36,78 @@
             tools:ignore="UselessParent">
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/menuLayout">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".25"
+                android:theme="@style/Button"
+                android:text="@string/menu"
+                android:textSize="13dp"
+                android:id="@+id/menuButton">
+            </Button>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".25"
+                android:theme="@style/Button"
+                android:text="@string/exit"
+                android:textSize="13dp"
+                android:id="@+id/exitButton">
+            </Button>
+
+        </LinearLayout>
+
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/tableLayout"
+            android:layout_below="@+id/scoreLayout">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/table"
                 android:layout_gravity="center"
-                android:src="@drawable/table" />
+                android:src="@drawable/table1" />
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:id="@+id/pino1"
-                android:layout_marginTop="64dp"/>
+                android:id="@+id/pino1"/>
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:id="@+id/pino2"
-                android:layout_marginTop="64dp"
-                android:layout_marginStart="325dp"/>
+                android:layout_marginStart="30dp"/>
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:id="@+id/pino3"
-                android:layout_marginTop="93dp"/>
+                android:layout_marginTop="30dp"/>
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:id="@+id/pino4"
-                android:layout_marginTop="93dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginStart="30dp"/>
-
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_gravity="bottom"
-            android:id="@+id/linearLayout">
+            android:id="@+id/linearLayout"
+            android:layout_below="@+id/tableLayout">
 
             <Button
                 android:layout_width="0dp"
@@ -124,7 +152,9 @@
             android:layout_height="wrap_content"
             android:stretchColumns="0, 1"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            android:paddingRight="20dp"
+            android:id="@+id/scoreLayout"
+            android:layout_below="@+id/menuLayout">
 
             <TableRow>
                 <TextView
@@ -159,8 +189,6 @@
                     android:textSize="20sp"
                     android:textColor="@color/balanceColor"/>
 
-
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -179,6 +207,6 @@
         </TableLayout>
 
 
-    </FrameLayout>
+    </RelativeLayout>
 
 </FrameLayout>

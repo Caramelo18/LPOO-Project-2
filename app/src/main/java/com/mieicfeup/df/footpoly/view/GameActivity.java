@@ -1,7 +1,6 @@
 package com.mieicfeup.df.footpoly.view;
 
 import android.annotation.SuppressLint;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
@@ -14,7 +13,6 @@ import android.widget.ImageView;
 
 import com.mieicfeup.df.footpoly.R;
 import com.mieicfeup.df.footpoly.controller.GameController;
-import com.mieicfeup.df.footpoly.controller.PlayerController;
 import com.mieicfeup.df.footpoly.controller.ScreenInfo;
 import com.mieicfeup.df.footpoly.model.Game;
 
@@ -109,7 +107,7 @@ public class GameActivity extends AppCompatActivity {
 
     public void loadInterface()
     {
-        tableIm = (ImageView) findViewById(R.id.table);
+        //tableIm = (ImageView) findViewById(R.id.table);
         /*int tableID = GameActivity.this.getResources().getIdentifier("table", "drawable", GameActivity.this.getPackageName());
         Integer id = tableID;
 
@@ -125,6 +123,7 @@ public class GameActivity extends AppCompatActivity {
             resId = getResources().getIdentifier("pino" + String.valueOf(i), "drawable", getPackageName());
             tmpImg.setImageResource(resId);
             playerImages.add(tmpImg);
+
             gameController.getPlayerList().get(i - 1).setImage(tmpImg);
         }
 
