@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/table"
                 android:layout_gravity="center"
-                android:src="@drawable/table1" />
+                android:src="@drawable/table" />
 
             <ImageView
                 android:layout_width="30dp"
