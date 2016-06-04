@@ -1,5 +1,7 @@
 package com.mieicfeup.df.footpoly.controller;
 
+import android.util.Log;
+
 import com.mieicfeup.df.footpoly.model.Game;
 
 import java.util.ArrayList;
@@ -51,5 +53,7 @@ public class GameController {
             currentPlayer = 0;
         else
             currentPlayer++;
+
+        this.playerList.get(currentPlayer).increaseIndex(1);
     }
 }

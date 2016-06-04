@@ -14,7 +14,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:keepScreenOn="true"
-        android:text="@string/dummy_content"
         android:textColor="#33b5e5"
         android:textSize="50sp"
         android:textStyle="bold" />
@@ -39,47 +38,41 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp">
+            android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:id="@+id/table"
                 android:layout_gravity="center"
                 android:src="@drawable/table" />
 
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:rowCount="6"
-                android:columnCount="6">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/pino1"
+                android:layout_marginTop="64dp"/>
 
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="55dp"
-                    android:id="@+id/pino1"
-                    android:src="@drawable/pino1"/>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/pino2"
+                android:layout_marginTop="64dp"
+                android:layout_marginStart="325dp"/>
 
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="55dp"
-                    android:id="@+id/pino2"
-                    android:src="@drawable/pino2"/>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/pino3"
+                android:layout_marginTop="93dp"/>
 
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="55dp"
-                    android:id="@+id/pino3"
-                    android:src="@drawable/pino3"/>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/pino4"
+                android:layout_marginTop="93dp"
+                android:layout_marginStart="30dp"/>
 
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="55dp"
-                    android:id="@+id/pino4"
-                    android:src="@drawable/pino4"/>
-
-            </GridLayout>
         </RelativeLayout>
 
         <LinearLayout
@@ -125,46 +118,66 @@
                 android:id="@+id/endRoundButton" />
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Player 1: 5000"
-            android:id="@+id/player1Balance"
-            android:textSize="20sp"
-            android:gravity="top"
-            android:textColor="@color/balanceColor"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Player 2: 5000"
-            android:id="@+id/player2Balance"
-            android:layout_marginTop="25dp"
-            android:textSize="20sp"
-            android:textColor="@color/balanceColor"/>
-
-        <TextView
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Player 3: 5000"
-            android:id="@+id/player3Balance"
-            android:gravity="right"
-            android:textSize="20sp"
-            android:textColor="@color/balanceColor"/>
+            android:stretchColumns="0, 1"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Player 4: 5000"
-            android:id="@+id/player4Balance"
-            android:layout_marginTop="25dp"
-            android:gravity="right"
-            android:textSize="20sp"
-            android:textColor="@color/balanceColor"/>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Player 1: 5000"
+                    android:id="@+id/player1Balance"
+                    android:textSize="20sp"
+                    android:gravity="top"
+                    android:textColor="@color/balanceColor"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Player 3: 5000"
+                    android:id="@+id/player3Balance"
+                    android:textSize="20sp"
+                    android:textColor="@color/balanceColor"
+                    android:layout_gravity="right"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="-20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Player 2: 5000"
+                    android:id="@+id/player2Balance"
+                    android:layout_marginTop="25dp"
+                    android:textSize="20sp"
+                    android:textColor="@color/balanceColor"/>
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Player 4: 5000"
+                    android:id="@+id/player4Balance"
+                    android:layout_marginTop="25dp"
+                    android:gravity="right"
+                    android:textSize="20sp"
+                    android:textColor="@color/balanceColor"/>
+
+            </TableRow>
+
+
+
+        </TableLayout>
+
 
     </FrameLayout>
 

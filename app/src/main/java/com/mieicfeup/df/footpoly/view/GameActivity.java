@@ -1,6 +1,7 @@
 package com.mieicfeup.df.footpoly.view;
 
 import android.annotation.SuppressLint;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import com.mieicfeup.df.footpoly.R;
 import com.mieicfeup.df.footpoly.controller.GameController;
 import com.mieicfeup.df.footpoly.controller.PlayerController;
+import com.mieicfeup.df.footpoly.controller.ScreenInfo;
 import com.mieicfeup.df.footpoly.model.Game;
 
 import java.util.ArrayList;
@@ -115,7 +117,15 @@ public class GameActivity extends AppCompatActivity {
 
         playerImages = new ArrayList<ImageView>();
 
-        for (PlayerController Player : gameController.getPlayerList()) {
+        for (int i = 1; i <= gameController.getPlayerList().size(); i++)
+        {
+            int resId = getResources().getIdentifier("pino" + String.valueOf(i), "id", getPackageName());
+            ImageView tmpImg = (ImageView) findViewById(resId);
+
+            resId = getResources().getIdentifier("pino" + String.valueOf(i), "drawable", getPackageName());
+            tmpImg.setImageResource(resId);
+            playerImages.add(tmpImg);
+            gameController.getPlayerList().get(i - 1).setImage(tmpImg);
         }
 
         mortgageButton = (Button) findViewById(R.id.mortgageButton);
@@ -130,6 +140,7 @@ public class GameActivity extends AppCompatActivity {
                 gameController.endTurn();
             }
         });
+
     }
 
 
@@ -143,6 +154,7 @@ public class GameActivity extends AppCompatActivity {
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
 
+        ScreenInfo screenInfo = new ScreenInfo(getApplicationContext().getResources().getDisplayMetrics().density);
         Game game = (Game) getIntent().getSerializableExtra("game");
         this.gameController = new GameController(game);
 
@@ -152,6 +164,8 @@ public class GameActivity extends AppCompatActivity {
         hide();
 
         loadInterface();
+
+
 
 
         // Upon interacting with UI controls, delay any scheduled hide()

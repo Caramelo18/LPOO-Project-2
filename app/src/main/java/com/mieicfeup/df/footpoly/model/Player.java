@@ -51,7 +51,7 @@ public class Player implements Serializable
      * @param inc value to increment
      */
     public void incrementIndex(int inc) {
-        this.index += index;
+        this.index += inc;
     }
 
     /**
