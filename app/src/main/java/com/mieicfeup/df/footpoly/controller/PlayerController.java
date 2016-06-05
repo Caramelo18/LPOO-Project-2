@@ -8,6 +8,7 @@ import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.mieicfeup.df.footpoly.model.Player;
 
@@ -18,6 +19,7 @@ public class PlayerController
 {
     private Player player;
     private ImageView playerImage;
+    private TextView playerText;
     private int movement;
 
     public PlayerController(Player player) {
@@ -37,6 +39,17 @@ public class PlayerController
      */
     public void setImage(ImageView playerImage) {
         this.playerImage = playerImage;
+    }
+
+    public void setText(TextView playerText)
+    {
+        this.playerText = playerText;
+    }
+
+    public void updateText()
+    {
+        String newText = player.getName() + ": " + player.getBalance();
+        playerText.setText(newText);
     }
 
     /**

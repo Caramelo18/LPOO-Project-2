@@ -71,6 +71,13 @@
             android:id="@+id/tableLayout"
             android:layout_below="@+id/scoreLayout">
 
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/dice"
+                android:id="@+id/rollDice"/>
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -161,7 +168,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Player 1: 5000"
                     android:id="@+id/player1Balance"
                     android:textSize="20sp"
                     android:gravity="top"
@@ -170,8 +176,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Player 3: 5000"
-                    android:id="@+id/player3Balance"
+                    android:id="@+id/player2Balance"
                     android:textSize="20sp"
                     android:textColor="@color/balanceColor"
                     android:layout_gravity="right"/>
@@ -183,8 +188,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Player 2: 5000"
-                    android:id="@+id/player2Balance"
+                    android:id="@+id/player3Balance"
                     android:layout_marginTop="25dp"
                     android:textSize="20sp"
                     android:textColor="@color/balanceColor"/>
@@ -193,7 +197,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Player 4: 5000"
                     android:id="@+id/player4Balance"
                     android:layout_marginTop="25dp"
                     android:gravity="right"

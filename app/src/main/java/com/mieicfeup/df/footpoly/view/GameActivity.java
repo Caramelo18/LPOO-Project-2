@@ -1,15 +1,19 @@
 package com.mieicfeup.df.footpoly.view;
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.mieicfeup.df.footpoly.R;
 import com.mieicfeup.df.footpoly.controller.GameController;
@@ -96,6 +100,9 @@ public class GameActivity extends AppCompatActivity {
     private ImageView tableIm;
 
     private ArrayList<ImageView> playerImages;
+    private ArrayList<TextView> playerText;
+
+    private ImageButton rollDice;
 
     private Button mortgageButton;
     private Button buyStadiumButton;
@@ -107,13 +114,8 @@ public class GameActivity extends AppCompatActivity {
 
     public void loadInterface()
     {
-        //tableIm = (ImageView) findViewById(R.id.table);
-        /*int tableID = GameActivity.this.getResources().getIdentifier("table", "drawable", GameActivity.this.getPackageName());
-        Integer id = tableID;
-
-        tableIm.setImageResource(tableID);*/
-
         playerImages = new ArrayList<ImageView>();
+        playerText = new ArrayList<TextView>();
 
         for (int i = 1; i <= gameController.getPlayerList().size(); i++)
         {
@@ -125,7 +127,29 @@ public class GameActivity extends AppCompatActivity {
             playerImages.add(tmpImg);
 
             gameController.getPlayerList().get(i - 1).setImage(tmpImg);
+
+            resId = getResources().getIdentifier("player" + String.valueOf(i) + "Balance", "id", getPackageName());
+            TextView tmpTxt = (TextView) findViewById(resId);
+            playerText.add(tmpTxt);
+
+            gameController.getPlayerList().get(i - 1).setText(tmpTxt);
+            gameController.getPlayerList().get(i - 1).updateText();
         }
+        gameController.shufflePlayers();
+
+        rollDice = (ImageButton) findViewById(R.id.rollDice);
+        rollDice.setOnClickListener(new ImageButton.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                gameController.rollDice();
+                rollDice.setClickable(false);
+                endRoundButton.setClickable(true);
+                mortgageButton.setClickable(true);
+                buyStadiumButton.setClickable(true);
+                upgradeStadiumButton.setClickable(true);
+            }
+        });
 
         mortgageButton = (Button) findViewById(R.id.mortgageButton);
 
@@ -137,6 +161,11 @@ public class GameActivity extends AppCompatActivity {
         endRoundButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 gameController.endTurn();
+                rollDice.setClickable(true);
+                endRoundButton.setClickable(false);
+                mortgageButton.setClickable(false);
+                buyStadiumButton.setClickable(false);
+                upgradeStadiumButton.setClickable(false);
             }
         });
 

@@ -31,6 +31,11 @@ public class GameController {
             playerList.add(i, new PlayerController(game.getPlayers().get(i)));
         }
 
+
+    }
+
+    public void shufflePlayers()
+    {
         Collections.shuffle(playerList);
     }
 
@@ -48,6 +53,12 @@ public class GameController {
         return currentPlayer;
     }
 
+    public void rollDice()
+    {
+        int rollValue = dice.rollDice();
+        this.playerList.get(currentPlayer).movePlayer(rollValue);
+    }
+
     /**
      * Updates currentPlayer to the next player
      */
@@ -56,11 +67,11 @@ public class GameController {
             currentPlayer = 0;
         else
             currentPlayer++;
+    }
 
-        int rollValue = dice.rollDice();
-
-        Log.w("Roll Value", Integer.toString(rollValue));
-
-        this.playerList.get(currentPlayer).movePlayer(rollValue);
+    public void updateAllTexts()
+    {
+        for(int i = 0; i < playerList.size(); i++)
+            playerList.get(i).updateText();
     }
 }

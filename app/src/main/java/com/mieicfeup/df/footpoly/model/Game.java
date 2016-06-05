@@ -4,6 +4,7 @@ import android.util.SparseBooleanArray;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Diogo on 01/06/2016.
@@ -23,6 +24,7 @@ public class Game implements Serializable {
         for (int i = 0; i < playerNames.size(); i++) {
             players.add(new Player(playerNames.get(i), checkedPlayers.get(i)));
         }
+
     }
 
     /**
