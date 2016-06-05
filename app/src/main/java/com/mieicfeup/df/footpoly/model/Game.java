@@ -42,14 +42,12 @@ public class Game implements Serializable {
     }
 
     /**
-     * Returns the Place object the specified player is on
-     * @param playerIndex index of the player
-     * @return the Place
+     * Checks if the player is at the jail
+     * @param player player to check
+     * @return true if it is at jail, false otherwise
      */
-    public Place getPlayerPlace(int playerIndex) {
-        String name = players.get(playerIndex).getName();
-        Log.w("getPlayerPlace", name);
-        int playerCurrPlace = players.get(playerIndex).getIndex();
-        return table.getPlaces(playerCurrPlace);
+    public boolean playerAtJail(Player player)
+    {
+        return table.playerAtJail(player);
     }
 }

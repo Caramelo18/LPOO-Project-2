@@ -8,12 +8,15 @@ import java.util.LinkedHashMap;
  */
 public class Table implements Serializable {
     LinkedHashMap<Integer, Place> places = new LinkedHashMap();
+    FreeParking freeParking;
+    Jail jail;
+    Luck luck;
 
     public Table()
     {
-        FreeParking freeParking = new FreeParking();
-        Jail jail = new Jail();
-        Luck luck = new Luck(freeParking);
+        freeParking = new FreeParking();
+        jail = new Jail();
+        luck = new Luck(freeParking);
 
         places.put(0, new StartingPoint());
         places.put(1, new Stadium("Emirates Stadium", "England", 500, 251));
@@ -45,9 +48,14 @@ public class Table implements Serializable {
         places.put(19, new Stadium("Estadio do Dragao", "Portugal", 500, 251));
     }
 
-    public Place getPlaces(int index)
+    public Place getPlace(int index)
     {
         return places.get(index);
+    }
+
+    public boolean playerAtJail(Player player)
+    {
+        return jail.atJail(player);
     }
 
 

@@ -7,17 +7,22 @@ import android.util.Log;
  */
 public class FreeParking extends Place
 {
-    private int ammount;
+    private int amount;
 
     public FreeParking()
     {
-        this.ammount = 0;
+        this.amount = 0;
     }
 
+    public void incAmount(int amount)
+    {
+        this.amount += amount;
+    }
     public boolean trigger(Player player)
     {
         Log.w("FreeParking", "trigger");
-        player.incBalance(0);
+        player.incBalance(amount);
+        this.amount = 0;
         return true;
     }
 }
