@@ -1,13 +1,13 @@
 package com.mieicfeup.df.footpoly.controller;
 
-import android.graphics.drawable.GradientDrawable;
-import android.util.Log;
+import android.os.Bundle;
 
 import com.mieicfeup.df.footpoly.model.Dice;
 import com.mieicfeup.df.footpoly.model.Game;
 import com.mieicfeup.df.footpoly.model.Place;
 import com.mieicfeup.df.footpoly.model.Player;
 import com.mieicfeup.df.footpoly.model.Stadium;
+import com.mieicfeup.df.footpoly.view.MortgageDialog;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -87,5 +87,17 @@ public class GameController {
     {
         for(int i = 0; i < playerList.size(); i++)
             playerList.get(i).updateText();
+    }
+
+    public MortgageDialog showMortgageDialog() {
+        MortgageDialog dialog = new MortgageDialog();
+        Bundle args = new Bundle();
+        ArrayList<Stadium> a = new ArrayList<Stadium>();
+        a.add((Stadium) game.getTable().getPlaces(2));
+        a.add((Stadium) game.getTable().getPlaces(4));
+        a.add((Stadium) game.getTable().getPlaces(18));
+        args.putSerializable("stadiumList", a);
+        dialog.setArguments(args);
+        return dialog;
     }
 }

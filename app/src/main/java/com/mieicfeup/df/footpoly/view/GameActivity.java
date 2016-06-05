@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -19,8 +18,7 @@ import android.widget.TextView;
 import com.mieicfeup.df.footpoly.R;
 import com.mieicfeup.df.footpoly.controller.GameController;
 import com.mieicfeup.df.footpoly.controller.ScreenInfo;
-import com.mieicfeup.df.footpoly.model.
-        Game;
+import com.mieicfeup.df.footpoly.model.Game;
 
 import java.util.ArrayList;
 
@@ -179,6 +177,14 @@ public class GameActivity extends AppCompatActivity {
         });
 
         mortgageButton = (Button) findViewById(R.id.mortgageButton);
+        mortgageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MortgageDialog dialog = gameController.showMortgageDialog();
+                dialog.show(getFragmentManager(), "dialog");
+
+            }
+        });
 
         buyStadiumButton = (Button) findViewById(R.id.buyStadiumButton);
 
@@ -199,6 +205,13 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            hide();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

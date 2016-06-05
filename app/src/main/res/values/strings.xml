@@ -20,6 +20,8 @@
 
     <string name="menu">Menu</string>
 
+    <string name="cancel">Cancel</string>
+
     <string name="mortgage">Mortgage</string>
     <string name="buyStadium">Buy Stadium</string>
     <string name="upgradeStadium">Upgrade Stadium</string>
