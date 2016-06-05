@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mieicfeup.df.footpoly.R;
@@ -102,6 +103,9 @@ public class GameActivity extends AppCompatActivity {
     private ArrayList<ImageView> playerImages;
     private ArrayList<TextView> playerText;
 
+    private Button menuButton;
+    private Button exitButton;
+
     private ImageButton rollDice;
 
     private Button mortgageButton;
@@ -114,6 +118,8 @@ public class GameActivity extends AppCompatActivity {
 
     public void loadInterface()
     {
+        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+
         playerImages = new ArrayList<ImageView>();
         playerText = new ArrayList<TextView>();
 
@@ -126,6 +132,15 @@ public class GameActivity extends AppCompatActivity {
             tmpImg.setImageResource(resId);
             playerImages.add(tmpImg);
 
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) tmpImg.getLayoutParams();
+            params.width = metrics.widthPixels / 12 - 2;
+            params.height = metrics.widthPixels / 12 - 2;
+            if (i == 2 || i == 4)
+                params.leftMargin = metrics.widthPixels / 12 - 1;
+            if (i == 3 || i == 4)
+                params.topMargin = metrics.widthPixels / 12 - 1;
+            tmpImg.setLayoutParams(params);
+
             gameController.getPlayerList().get(i - 1).setImage(tmpImg);
 
             resId = getResources().getIdentifier("player" + String.valueOf(i) + "Balance", "id", getPackageName());
@@ -135,7 +150,18 @@ public class GameActivity extends AppCompatActivity {
             gameController.getPlayerList().get(i - 1).setText(tmpTxt);
             gameController.getPlayerList().get(i - 1).updateText();
         }
+
         gameController.shufflePlayers();
+
+        menuButton = (Button) findViewById(R.id.menuButton);
+
+        exitButton = (Button) findViewById(R.id.exitButton);
+        exitButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                finish();
+                System.exit(0);
+            }
+        });
 
         rollDice = (ImageButton) findViewById(R.id.rollDice);
         rollDice.setOnClickListener(new ImageButton.OnClickListener()
@@ -193,12 +219,14 @@ public class GameActivity extends AppCompatActivity {
 
         loadInterface();
 
-
-
-
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     @Override

@@ -4,7 +4,6 @@ import android.util.SparseBooleanArray;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Created by Diogo on 01/06/2016.
@@ -39,5 +38,15 @@ public class Game implements Serializable {
      */
     public Table getTable() {
         return table;
+    }
+
+    /**
+     * Returns the Place object the specified player is on
+     * @param playerIndex index of the player
+     * @return the Place
+     */
+    public Place getPlayerPlace(int playerIndex) {
+        int playerCurrPlace = players.get(playerIndex).getIndex();
+        return table.getPlaces(playerCurrPlace);
     }
 }
