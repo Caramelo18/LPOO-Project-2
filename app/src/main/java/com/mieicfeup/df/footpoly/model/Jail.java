@@ -1,5 +1,7 @@
 package com.mieicfeup.df.footpoly.model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -29,7 +31,8 @@ public class Jail extends Place
 
     public boolean trigger(Player player)
     {
-        int index = 0;
+        Log.w("Jail", "trigger");
+        int index = -1;
         for(int i = 0; i < players.size(); ++i)
         {
             if(players.get(i) == player)
@@ -38,6 +41,9 @@ public class Jail extends Place
                 break;
             }
         }
+
+        if(index == -1)
+            return true;
 
         int remaining = remainingTurns.get(index);
         --remaining;

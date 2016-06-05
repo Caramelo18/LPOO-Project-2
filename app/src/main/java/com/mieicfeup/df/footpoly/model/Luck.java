@@ -1,5 +1,7 @@
 package com.mieicfeup.df.footpoly.model;
 
+import android.util.Log;
+
 import java.util.Random;
 
 /**
@@ -23,11 +25,13 @@ public class Luck extends Place
         int ammount = 200 * times;
         if (card < 6) // player must play
         {
+            Log.w("luck", "pay");
             return player.decBalance(ammount);
         }
         else // player will receive money
         {
             player.incBalance(ammount);
+            Log.w("luck", "receive");
             return true;
         }
     }

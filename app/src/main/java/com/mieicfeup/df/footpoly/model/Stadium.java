@@ -1,5 +1,7 @@
 package com.mieicfeup.df.footpoly.model;
 
+import android.util.Log;
+
 /**
  * Created by fabio on 01/05/2016.
  */
@@ -88,6 +90,7 @@ public class Stadium extends Place
 
     public boolean trigger(Player player)
     {
+        Log.w("Stadium", "trigger");
         if(this.owner == player || this.owner == null)
             return true;
 

@@ -19,7 +19,8 @@ import android.widget.TextView;
 import com.mieicfeup.df.footpoly.R;
 import com.mieicfeup.df.footpoly.controller.GameController;
 import com.mieicfeup.df.footpoly.controller.ScreenInfo;
-import com.mieicfeup.df.footpoly.model.Game;
+import com.mieicfeup.df.footpoly.model.
+        Game;
 
 import java.util.ArrayList;
 
@@ -194,6 +195,7 @@ public class GameActivity extends AppCompatActivity {
                 upgradeStadiumButton.setClickable(false);
             }
         });
+        endRoundButton.setClickable(false);
 
     }
 
@@ -211,9 +213,6 @@ public class GameActivity extends AppCompatActivity {
         ScreenInfo screenInfo = new ScreenInfo(getApplicationContext().getResources().getDisplayMetrics().density);
         Game game = (Game) getIntent().getSerializableExtra("game");
         this.gameController = new GameController(game);
-
-        Log.w("Size", Integer.toString(gameController.getPlayerList().size()));
-        Log.w("Player", gameController.getPlayerList().get(0).getPlayer().getName());
 
         hide();
 

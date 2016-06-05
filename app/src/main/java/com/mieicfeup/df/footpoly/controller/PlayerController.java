@@ -1,6 +1,7 @@
 package com.mieicfeup.df.footpoly.controller;
 
 import android.content.res.Resources;
+import android.graphics.drawable.GradientDrawable;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.animation.Animation;
@@ -52,13 +53,25 @@ public class PlayerController
         playerText.setText(newText);
     }
 
+    public void clearStroke()
+    {
+        playerText.setBackgroundResource(0);
+    }
+
+    public void strokeText()
+    {
+        GradientDrawable gd = new GradientDrawable();
+        gd.setColor(0x00000000);
+        gd.setCornerRadius(5);
+        gd.setStroke(3, 0xFF000000);
+        playerText.setBackground(gd);
+    }
+
     /**
      * Handles the movement of the player and the animation of the token
      * @param inc value to increment
      */
     public void movePlayer(int inc) {
-        Log.w(player.getName() + " Old Position", String.valueOf(this.player.getIndex()));
-        Log.w(player.getName() + " Increment", String.valueOf(inc));
 
         AnimationSet set = new AnimationSet(false);
         long animDuration = 200;
@@ -76,6 +89,7 @@ public class PlayerController
                 yDist -= movement;
 
                 player.incrementIndex(-19);
+
             }
             else {
                 if (playerIndex < 5) {

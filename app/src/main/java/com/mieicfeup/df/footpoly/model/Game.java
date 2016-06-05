@@ -1,5 +1,6 @@
 package com.mieicfeup.df.footpoly.model;
 
+import android.util.Log;
 import android.util.SparseBooleanArray;
 
 import java.io.Serializable;
@@ -46,6 +47,8 @@ public class Game implements Serializable {
      * @return the Place
      */
     public Place getPlayerPlace(int playerIndex) {
+        String name = players.get(playerIndex).getName();
+        Log.w("getPlayerPlace", name);
         int playerCurrPlace = players.get(playerIndex).getIndex();
         return table.getPlaces(playerCurrPlace);
     }

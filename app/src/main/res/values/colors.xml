@@ -13,4 +13,6 @@
     <color name="listViewBackground">#40383838</color>
     <color name="listViewDivider">#64383838</color>
     <color name="listViewText">#ffffffff</color>
+
+    <color name="gameBackground">#00a1d6</color>
 </resources>

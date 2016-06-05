@@ -1,9 +1,13 @@
 package com.mieicfeup.df.footpoly.controller;
 
+import android.graphics.drawable.GradientDrawable;
 import android.util.Log;
 
 import com.mieicfeup.df.footpoly.model.Dice;
 import com.mieicfeup.df.footpoly.model.Game;
+import com.mieicfeup.df.footpoly.model.Place;
+import com.mieicfeup.df.footpoly.model.Player;
+import com.mieicfeup.df.footpoly.model.Stadium;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,6 +41,7 @@ public class GameController {
     public void shufflePlayers()
     {
         Collections.shuffle(playerList);
+        playerList.get(0).strokeText();
     }
 
     /**
@@ -57,16 +62,25 @@ public class GameController {
     {
         int rollValue = dice.rollDice();
         this.playerList.get(currentPlayer).movePlayer(rollValue);
+
+        Player player = this.playerList.get(currentPlayer).getPlayer();
+        Place currPlace = game.getTable().getPlaces(player.getIndex());
+
+        currPlace.trigger(player);
+        updateAllTexts();
     }
 
     /**
      * Updates currentPlayer to the next player
      */
     public void endTurn() {
+        playerList.get(currentPlayer).clearStroke();
         if (currentPlayer == playerList.size() - 1)
             currentPlayer = 0;
         else
             currentPlayer++;
+
+        playerList.get(currentPlayer).strokeText();
     }
 
     public void updateAllTexts()
