@@ -61,12 +61,26 @@ public class GameController {
     public void rollDice()
     {
         int rollValue = dice.rollDice();
-        this.playerList.get(currentPlayer).movePlayer(rollValue);
-
         Player player = this.playerList.get(currentPlayer).getPlayer();
-        Place currPlace = game.getTable().getPlaces(player.getIndex());
 
+        if(game.playerAtJail(player))
+        {
+            Place jail = game.getTable().getPlace(5);
+            jail.trigger(player);
+            return;
+        }
+
+
+        if(this.playerList.get(currentPlayer).movePlayer(rollValue))
+        {
+            Place start = game.getTable().getPlace(0);
+            start.trigger(player);
+        }
+
+
+        Place currPlace = game.getTable().getPlace(player.getIndex());
         currPlace.trigger(player);
+
         updateAllTexts();
     }
 

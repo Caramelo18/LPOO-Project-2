@@ -70,9 +70,11 @@ public class PlayerController
     /**
      * Handles the movement of the player and the animation of the token
      * @param inc value to increment
+     * @return true if passes by starting point, false otherwise
      */
-    public void movePlayer(int inc) {
+    public boolean movePlayer(int inc) {
 
+        boolean throughStart = false;
         AnimationSet set = new AnimationSet(false);
         long animDuration = 200;
 
@@ -89,6 +91,7 @@ public class PlayerController
                 yDist -= movement;
 
                 player.incrementIndex(-19);
+                throughStart = true;
 
             }
             else {
@@ -118,11 +121,24 @@ public class PlayerController
             set.addAnimation(anim);
         }
 
+        if(player.getIndex() == 15)
+        {
+            TranslateAnimation anim = new TranslateAnimation(0, movement, 0, -movement);
+            anim.setDuration(animDuration);
+            anim.setStartOffset(animDuration * inc);
+            xDist += movement * 6;
+            yDist -= movement * 6;
+            player.incrementIndex(-10);
+            set.addAnimation(anim);
+            Log.w("playCtrl", "animating to jail");
+        }
+
         set.setAnimationListener(animationListener(xDist, yDist));
 
         playerImage.startAnimation(set);
 
         Log.w(player.getName() + " New Position", String.valueOf(this.player.getIndex()));
+        return throughStart;
     }
 
     /**

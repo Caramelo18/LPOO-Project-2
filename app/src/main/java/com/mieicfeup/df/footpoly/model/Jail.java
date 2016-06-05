@@ -27,6 +27,8 @@ public class Jail extends Place
     {
         players.add(player);
         remainingTurns.add(2);
+        Log.w("players size", String.valueOf(players.size()));
+        Log.w("remaining size", String.valueOf(remainingTurns.size()));
     }
 
     public boolean trigger(Player player)
@@ -50,8 +52,11 @@ public class Jail extends Place
 
         if(remaining == 0)
         {
-            players.remove(index);
+            players.remove(player);
             remainingTurns.remove(index);
+            Log.w("after remove", player.getName());
+            Log.w("rem players size", String.valueOf(players.size()));
+            Log.w("rem remaining size", String.valueOf(remainingTurns.size()));
             return true;
         }
         remainingTurns.set(index, remaining);

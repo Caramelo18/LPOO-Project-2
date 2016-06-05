@@ -22,15 +22,16 @@ public class Luck extends Place
     {
         int card = rand.nextInt(10);
         int times = rand.nextInt(3) + 1;
-        int ammount = 200 * times;
+        int amount = 200 * times;
         if (card < 6) // player must play
         {
             Log.w("luck", "pay");
-            return player.decBalance(ammount);
+            freeParking.incAmount(amount);
+            return player.decBalance(amount);
         }
         else // player will receive money
         {
-            player.incBalance(ammount);
+            player.incBalance(amount);
             Log.w("luck", "receive");
             return true;
         }
