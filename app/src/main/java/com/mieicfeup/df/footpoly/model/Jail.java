@@ -31,7 +31,7 @@ public class Jail extends Place
         Log.w("remaining size", String.valueOf(remainingTurns.size()));
     }
 
-    public boolean trigger(Player player)
+    public dialogType trigger(Player player)
     {
         Log.w("Jail", "trigger");
         int index = -1;
@@ -45,7 +45,7 @@ public class Jail extends Place
         }
 
         if(index == -1)
-            return true;
+            return dialogType.NODIALOG;
 
         int remaining = remainingTurns.get(index);
         --remaining;
@@ -57,10 +57,10 @@ public class Jail extends Place
             Log.w("after remove", player.getName());
             Log.w("rem players size", String.valueOf(players.size()));
             Log.w("rem remaining size", String.valueOf(remainingTurns.size()));
-            return true;
+            return dialogType.NODIALOG;
         }
         remainingTurns.set(index, remaining);
-        return true;
+        return dialogType.NODIALOG;
 
     }
 }

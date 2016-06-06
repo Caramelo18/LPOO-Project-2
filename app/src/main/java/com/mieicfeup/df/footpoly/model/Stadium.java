@@ -107,19 +107,19 @@ public class Stadium extends Place
      * @param player player at the stadium
      * @return false if stadium has no owner, true otherwise
      */
-    public boolean trigger(Player player)
+    public dialogType trigger(Player player)
     {
         Log.w("Stadium", "trigger");
         if(this.owner == player)
-            return true;
+            return dialogType.NODIALOG;
 
         if(this.owner == null)
-            return false;
+            return dialogType.BUYSTADIUM;
 
         int amount = this.getRent();
         if(!player.decBalance(amount))
-            return true;
+            return dialogType.NODIALOG;
         owner.incBalance(amount);
-        return true;
+        return dialogType.NODIALOG;
     }
 }

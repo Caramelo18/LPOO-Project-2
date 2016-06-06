@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -170,14 +171,19 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 rollDice.setClickable(false);
+                int dialogType = gameController.startTurn();
 
-                if(gameController.startTurn() == 1)
+                if(dialogType == 1)
                 {
                     BuyStadiumDialog dialog = gameController.showBuyStadiumDialog();
                     dialog.setContext(context);
                     dialog.show(getFragmentManager(), "dialog");
                 }
-
+                else if(dialogType == 2)
+                {
+                    LuckDialog dialog = gameController.showLuckDialog();
+                    dialog.show(getFragmentManager(), "dialog");
+                }
                 endRoundButton.setClickable(true);
                 mortgageButton.setClickable(true);
                 buyStadiumButton.setClickable(true);
@@ -230,6 +236,9 @@ public class GameActivity extends AppCompatActivity {
         mortgageButton.setClickable(false);
         buyStadiumButton.setClickable(false);
         upgradeStadiumButton.setClickable(false);
+
+        BotDialog botDialog = new BotDialog();
+        botDialog.setContext(this);
 
     }
 

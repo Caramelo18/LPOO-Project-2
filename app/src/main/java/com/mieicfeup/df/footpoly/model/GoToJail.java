@@ -14,10 +14,10 @@ public class GoToJail extends Place
         this.jail = jail;
     }
 
-    public boolean trigger(Player player)
+    public dialogType trigger(Player player)
     {
         Log.w("GotoJail", "trigger");
         jail.addPlayer(player);
-        return true;
+        return dialogType.NODIALOG;
     }
 }
