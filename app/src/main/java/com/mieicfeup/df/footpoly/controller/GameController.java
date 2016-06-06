@@ -71,13 +71,11 @@ public class GameController {
             return 0;
         }
 
-
-        if(this.playerList.get(currentPlayer).movePlayer(rollValue))
+        if(this.playerList.get(currentPlayer).movePlayer(3))
         {
             Place start = game.getTable().getPlace(0);
             start.trigger(player);
         }
-
 
         Place currPlace = game.getTable().getPlace(player.getIndex());
         if(!currPlace.trigger(player))

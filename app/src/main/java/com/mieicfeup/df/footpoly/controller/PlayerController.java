@@ -19,6 +19,25 @@ import com.mieicfeup.df.footpoly.model.Stadium;
  */
 public class PlayerController
 {
+    /**
+     * Int Wrapper, used to be able to modify int in a function
+     */
+    private class WrapInt {
+        private int value;
+
+        public WrapInt(int value) {
+            this.value = value;
+        }
+
+        public void setValue(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
+
     private Player player;
     private ImageView playerImage;
     private TextView playerText;
@@ -79,8 +98,37 @@ public class PlayerController
         AnimationSet set = new AnimationSet(false);
         long animDuration = 200;
 
-        int xDist = 0;
-        int yDist = 0;
+        WrapInt xDist = new WrapInt(0);
+        WrapInt yDist = new WrapInt(0);
+
+        if(addAnimationToSet(set, 0, xDist, yDist, inc))
+            throughStart = true;
+
+        if (player.getIndex() == 15)
+            addAnimationToSet(set, inc, xDist, yDist, 10);
+
+        set.setAnimationListener(animationListener(xDist.getValue(), yDist.getValue()));
+
+        playerImage.startAnimation(set);
+        Log.w(player.getName() + " New Position", String.valueOf(this.player.getIndex()));
+        return throughStart;
+    }
+
+    /**
+     * Adds the necessary animations to move inc places to the animationSet
+     * @param set AnimationSet to add the animations
+     * @param startingOffset starting offset for the animations
+     * @param xDist x axis distance
+     * @param yDist y axis distance
+     * @param inc number of places to move
+     * @return true if it goes through Starting Point and false otherwise
+     */
+    private boolean addAnimationToSet(AnimationSet set, long startingOffset, WrapInt xDist, WrapInt yDist, int inc) {
+        boolean throughStart = false;
+        long animDuration = 200;
+
+        int xValue = xDist.getValue();
+        int yValue = yDist.getValue();
 
         for (int i = 0; i < inc; i++) {
             TranslateAnimation anim;
@@ -89,59 +137,43 @@ public class PlayerController
 
             if (playerIndex == 19) {
                 anim = new TranslateAnimation(0, 0, 0, -movement);
-                yDist -= movement;
+                yValue -= movement;
 
                 player.incrementIndex(-19);
                 throughStart = true;
-
             }
             else {
                 if (playerIndex < 5) {
                     anim = new TranslateAnimation(0, movement, 0, 0);
-                    xDist += movement;
+                    xValue += movement;
                 }
                 else if (playerIndex < 10) {
                     anim = new TranslateAnimation(0, 0, 0, movement);
-                    yDist += movement;
+                    yValue += movement;
                 }
                 else if (playerIndex < 15) {
                     anim = new TranslateAnimation(0, -movement, 0, 0);
-                    xDist -= movement;
+                    xValue -= movement;
                 }
                 else {
                     anim = new TranslateAnimation(0, 0, 0, -movement);
-                    yDist -= movement;
+                    yValue -= movement;
                 }
 
                 player.incrementIndex(1);
             }
 
             anim.setDuration(animDuration);
-            anim.setStartOffset(animDuration * i);
+            anim.setStartOffset(animDuration * (i + startingOffset));
 
             set.addAnimation(anim);
+
+            xDist.setValue(xValue);
+            yDist.setValue(yValue);
         }
 
-        if(player.getIndex() == 15)
-        {
-            TranslateAnimation anim = new TranslateAnimation(0, movement, 0, -movement);
-            anim.setDuration(animDuration);
-            anim.setStartOffset(animDuration * inc);
-            xDist += movement * 6;
-            yDist -= movement * 6;
-            player.incrementIndex(-10);
-            set.addAnimation(anim);
-            Log.w("playCtrl", "animating to jail");
-        }
-
-        set.setAnimationListener(animationListener(xDist, yDist));
-
-        playerImage.startAnimation(set);
-
-        Log.w(player.getName() + " New Position", String.valueOf(this.player.getIndex()));
         return throughStart;
     }
-
     /**
      * Creates the AnimationListener that handles the translation of the token after the Animation
      * @param translateX x axis translation
