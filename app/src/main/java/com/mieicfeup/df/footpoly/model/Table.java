@@ -53,6 +53,11 @@ public class Table implements Serializable {
         return places.size();
     }
 
+    public Jail getJail()
+    {
+        return this.jail;
+    }
+
     public Place getPlace(int index)
     {
         return places.get(index);
