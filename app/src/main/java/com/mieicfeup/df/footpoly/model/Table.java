@@ -36,8 +36,8 @@ public class Table implements Serializable {
         places.put(11, new Stadium("Signal Iduna Park", "Germany", 500, 251));
         places.put(12, new Stadium("Allianz Arena", "Germany", 500, 251));
 
-        places.put(13, new Stadium("San Siro", "Italy", 500, 251));
-        places.put(14, new Stadium("Juventus Stadium", "Italy", 500, 251));
+        places.put(13, new Stadium("Juventus Stadium", "Italy", 500, 251));
+        places.put(14, new Stadium("San Siro", "Italy", 500, 251));
 
         places.put(15, new GoToJail(jail));
 

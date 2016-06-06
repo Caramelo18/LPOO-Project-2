@@ -50,6 +50,11 @@ public class Stadium extends Place
         return (this.rent + (this.rent * this.upgradeLevel));
     }
 
+    public int getRent(int upgradeLevel)
+    {
+        return (this.rent + (this.rent * upgradeLevel));
+    }
+
     public Player getOwner()
     {
         return owner;
@@ -88,16 +93,23 @@ public class Stadium extends Place
         }
     }
 
+    /**
+     * @param player player at the stadium
+     * @return false if stadium has no owner, true otherwise
+     */
     public boolean trigger(Player player)
     {
         Log.w("Stadium", "trigger");
-        if(this.owner == player || this.owner == null)
+        if(this.owner == player)
             return true;
 
-        int ammount = this.getRent();
-        if(!player.decBalance(ammount))
+        if(this.owner == null)
             return false;
-        owner.incBalance(ammount);
+
+        int amount = this.getRent();
+        if(!player.decBalance(amount))
+            return true;
+        owner.incBalance(amount);
         return true;
     }
 }

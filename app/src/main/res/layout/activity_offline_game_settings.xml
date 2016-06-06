@@ -71,6 +71,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="120dp"
                 android:layout_marginTop="140dp"
+                android:cacheColorHint="@color/balanceColor"
                 style="@style/PlayerListStyle"/>
 
             <EditText

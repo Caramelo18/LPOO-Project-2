@@ -7,6 +7,7 @@ import com.mieicfeup.df.footpoly.model.Game;
 import com.mieicfeup.df.footpoly.model.Place;
 import com.mieicfeup.df.footpoly.model.Player;
 import com.mieicfeup.df.footpoly.model.Stadium;
+import com.mieicfeup.df.footpoly.view.BuyStadiumDialog;
 import com.mieicfeup.df.footpoly.view.MortgageDialog;
 
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class GameController {
         return currentPlayer;
     }
 
-    public void rollDice()
+    public int rollDice()
     {
         int rollValue = dice.rollDice();
         Player player = this.playerList.get(currentPlayer).getPlayer();
@@ -67,7 +68,7 @@ public class GameController {
         {
             Place jail = game.getTable().getPlace(5);
             jail.trigger(player);
-            return;
+            return 0;
         }
 
 
@@ -79,9 +80,11 @@ public class GameController {
 
 
         Place currPlace = game.getTable().getPlace(player.getIndex());
-        currPlace.trigger(player);
+        if(!currPlace.trigger(player))
+            return 1;
 
         updateAllTexts();
+        return 0;
     }
 
     /**
@@ -107,11 +110,20 @@ public class GameController {
         MortgageDialog dialog = new MortgageDialog();
         Bundle args = new Bundle();
         ArrayList<Stadium> a = new ArrayList<Stadium>();
-        a.add((Stadium) game.getTable().getPlaces(2));
-        a.add((Stadium) game.getTable().getPlaces(4));
-        a.add((Stadium) game.getTable().getPlaces(18));
+        a.add((Stadium) game.getTable().getPlace(2));
+        a.add((Stadium) game.getTable().getPlace(4));
+        a.add((Stadium) game.getTable().getPlace(18));
         args.putSerializable("stadiumList", a);
         dialog.setArguments(args);
+        return dialog;
+    }
+
+    public BuyStadiumDialog showBuyStadiumDialog()
+    {
+        BuyStadiumDialog dialog = new BuyStadiumDialog();
+        Place currPlace = game.getTable().getPlace(playerList.get(currentPlayer).getPlayer().getIndex());
+        Stadium stadium = (Stadium) currPlace;
+        dialog.setData(stadium, playerList.get(currentPlayer));
         return dialog;
     }
 }

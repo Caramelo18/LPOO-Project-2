@@ -167,7 +167,12 @@ public class GameActivity extends AppCompatActivity {
         {
             public void onClick(View v)
             {
-                gameController.rollDice();
+                if(gameController.rollDice() == 1)
+                {
+                    BuyStadiumDialog dialog = gameController.showBuyStadiumDialog();
+                    dialog.show(getFragmentManager(), "dialog");
+                }
+
                 rollDice.setClickable(false);
                 endRoundButton.setClickable(true);
                 mortgageButton.setClickable(true);

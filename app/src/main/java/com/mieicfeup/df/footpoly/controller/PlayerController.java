@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mieicfeup.df.footpoly.model.Player;
+import com.mieicfeup.df.footpoly.model.Stadium;
 
 /**
  * Created by Diogo on 01/06/2016.
@@ -174,5 +175,11 @@ public class PlayerController
                 playerImage.setLayoutParams(params);
             }
         };
+    }
+
+    public void buyStadium(Stadium stadium)
+    {
+        if(this.player.decBalance(stadium.getCost()))
+            stadium.setOwner(this.player);
     }
 }
