@@ -110,6 +110,7 @@ public class PlayerController
         set.setAnimationListener(animationListener(xDist.getValue(), yDist.getValue()));
 
         playerImage.startAnimation(set);
+
         Log.w(player.getName() + " New Position", String.valueOf(this.player.getIndex()));
         return throughStart;
     }
@@ -174,6 +175,7 @@ public class PlayerController
 
         return throughStart;
     }
+
     /**
      * Creates the AnimationListener that handles the translation of the token after the Animation
      * @param translateX x axis translation
@@ -209,9 +211,18 @@ public class PlayerController
         };
     }
 
-    public void buyStadium(Stadium stadium)
+    /**
+     * Buys the stadium, if the player has enough money
+     * @param stadium stadium to buy
+     * @return true if stadium was bought and false if the player doesn't have enough money
+     */
+    public boolean buyStadium(Stadium stadium)
     {
-        if(this.player.decBalance(stadium.getCost()))
+        if(this.player.decBalance(stadium.getCost())) {
             stadium.setOwner(this.player);
+            return true;
+        }
+
+        return false;
     }
 }

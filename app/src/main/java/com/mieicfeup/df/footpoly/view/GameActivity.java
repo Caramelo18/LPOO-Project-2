@@ -119,6 +119,7 @@ public class GameActivity extends AppCompatActivity {
     public void loadInterface()
     {
         DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+        final Context context = this;
 
         playerImages = new ArrayList<ImageView>();
         playerText = new ArrayList<TextView>();
@@ -173,6 +174,7 @@ public class GameActivity extends AppCompatActivity {
                 if(gameController.startTurn() == 1)
                 {
                     BuyStadiumDialog dialog = gameController.showBuyStadiumDialog();
+                    dialog.setContext(context);
                     dialog.show(getFragmentManager(), "dialog");
                 }
 
@@ -195,7 +197,6 @@ public class GameActivity extends AppCompatActivity {
 
         buyStadiumButton = (Button) findViewById(R.id.buyStadiumButton);
 
-        final Context context = this;
         upgradeStadiumButton = (Button) findViewById(R.id.upgradeStadiumButton);
         upgradeStadiumButton.setOnClickListener(new View.OnClickListener() {
             @Override

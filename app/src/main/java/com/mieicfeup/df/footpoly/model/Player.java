@@ -11,6 +11,21 @@ public class Player implements Serializable
     private int balance;
     private int index;
     private Boolean isHuman;
+    private Boolean bankrupt;
+
+    /**
+     * @return true if player is bankrupt and false otherwise
+     */
+    public Boolean isBankrupt() {
+        return bankrupt;
+    }
+
+    /**
+     * @param bankrupt sets player as bankrupt if true
+     */
+    public void setBankrupt(Boolean bankrupt) {
+        this.bankrupt = bankrupt;
+    }
 
     /**
      * Player Constructor
@@ -22,6 +37,7 @@ public class Player implements Serializable
         this.balance = 5000;
         this.index = 0;
         this.isHuman = isHuman;
+        this.bankrupt = false;
     }
 
     /**
@@ -62,17 +78,17 @@ public class Player implements Serializable
         return balance;
     }
 
-    public boolean decBalance(int ammount)
+    public boolean decBalance(int amount)
     {
-        if(ammount > this.balance)
+        if(amount > this.balance)
             return false;
 
-        this.balance -= ammount;
+        this.balance -= amount;
         return true;
     }
 
-    public void incBalance(int ammount)
+    public void incBalance(int amount)
     {
-        this.balance += ammount;
+        this.balance += amount;
     }
 }

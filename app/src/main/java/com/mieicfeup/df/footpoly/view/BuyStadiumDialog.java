@@ -3,9 +3,9 @@ package com.mieicfeup.df.footpoly.view;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.mieicfeup.df.footpoly.R;
 import com.mieicfeup.df.footpoly.controller.PlayerController;
-import com.mieicfeup.df.footpoly.model.Player;
 import com.mieicfeup.df.footpoly.model.Stadium;
 
 /**
@@ -24,9 +23,18 @@ public class BuyStadiumDialog extends DialogFragment
 {
     private Stadium stadium;
     private PlayerController player;
+    private Dialog dialog;
+    private AlertDialog.Builder builder;
+    private Context context;
+
     public BuyStadiumDialog()
     {
 
+    }
+
+    public void setContext(Context context)
+    {
+        this.context = context;
     }
 
     public void setData(Stadium stadium, PlayerController player)
@@ -38,7 +46,7 @@ public class BuyStadiumDialog extends DialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
-       AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.buy_stadium_dialog_layout, null);
         builder.setView(view);
@@ -66,8 +74,10 @@ public class BuyStadiumDialog extends DialogFragment
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
-                        player.buyStadium(stadium);
-                        player.updateText();
+                        if (!player.buyStadium(stadium))
+                            notEnoughMoney();
+                        else
+                            player.updateText();
                     }
                 })
                 .setNegativeButton(R.string.dialogNoBuy, new DialogInterface.OnClickListener() {
@@ -77,13 +87,13 @@ public class BuyStadiumDialog extends DialogFragment
                     }
                 });
 
-        Dialog dialog = builder.create();
+        dialog = builder.create();
         dialog.setCanceledOnTouchOutside(false);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         return dialog;
     }
 
-    public int getStadiumColor()
+    private int getStadiumColor()
     {
         if(this.stadium.getCountry().equals("England"))
             return getResources().getColor(R.color.stadiumWhite);
@@ -95,5 +105,19 @@ public class BuyStadiumDialog extends DialogFragment
             return getResources().getColor(R.color.stadiumBlue);
         else
             return getResources().getColor(R.color.stadiumGreen);
+    }
+
+    private void notEnoughMoney() {
+        dialog.dismiss();
+        builder = new AlertDialog.Builder(context);
+
+        builder.setMessage("You don't have enough money to buy this Stadium.")
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+
+        dialog = builder.create();
+        dialog.show();
     }
 }
