@@ -11,6 +11,7 @@ import android.util.SparseBooleanArray;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -161,7 +162,17 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
         playersNames.add("Player 1");
         playersNames.add("Player 2");
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked, playersNames);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked, playersNames){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView tv = (TextView) view;
+
+                tv.setTextColor(getResources().getColor(R.color.listViewText));
+
+                return view;
+            }
+        };
         playersList.setAdapter(adapter);
 
         humanPlayers = new SparseBooleanArray();

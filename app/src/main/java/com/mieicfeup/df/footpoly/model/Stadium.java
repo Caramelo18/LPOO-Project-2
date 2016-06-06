@@ -79,17 +79,19 @@ public class Stadium extends Place
         }
     }
 
-    public void setMortgaged()
+    public void setMortgaged(boolean mortgage)
     {
-        if(this.mortgaged)
-        {
-            owner.decBalance(this.cost);
-            this.mortgaged = false;
-        }
-        else
+        if(mortgage && !this.mortgaged)
         {
             owner.incBalance(this.cost);
             this.mortgaged = true;
+            return;
+        }
+        else if(!mortgage && this.mortgaged)
+        {
+            owner.decBalance(this.cost);
+            this.mortgaged = false;
+            return;
         }
     }
 

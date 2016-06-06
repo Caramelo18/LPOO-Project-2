@@ -8,11 +8,11 @@
     <color name="buttonTextColor">#212121</color>
 
     <color name="black_overlay">#66000000</color>
-    <color name="balanceColor">#ffffff</color>
+    <color name="balanceColor">#F5F5F5</color>
 
-    <color name="listViewBackground">#40383838</color>
+    <color name="listViewBackground">#80383838</color>
     <color name="listViewDivider">#64383838</color>
-    <color name="listViewText">#ffffffff</color>
+    <color name="listViewText">#FFF5F5F5</color>
 
     <color name="gameBackground">#00a1d6</color>
 

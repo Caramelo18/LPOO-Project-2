@@ -107,11 +107,10 @@ public class GameController {
     public MortgageDialog showMortgageDialog() {
         MortgageDialog dialog = new MortgageDialog();
         Bundle args = new Bundle();
-        ArrayList<Stadium> a = new ArrayList<Stadium>();
-        a.add((Stadium) game.getTable().getPlace(2));
-        a.add((Stadium) game.getTable().getPlace(4));
-        a.add((Stadium) game.getTable().getPlace(18));
+        Player player = playerList.get(currentPlayer).getPlayer();
+        ArrayList<Stadium> a = game.stadiumsOwnedBy(player);
         args.putSerializable("stadiumList", a);
+        dialog.setPlayer(playerList.get(currentPlayer));
         dialog.setArguments(args);
         return dialog;
     }
