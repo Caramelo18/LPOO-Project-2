@@ -168,13 +168,14 @@ public class GameActivity extends AppCompatActivity {
         {
             public void onClick(View v)
             {
-                if(gameController.rollDice() == 1)
+                rollDice.setClickable(false);
+
+                if(gameController.startTurn() == 1)
                 {
                     BuyStadiumDialog dialog = gameController.showBuyStadiumDialog();
                     dialog.show(getFragmentManager(), "dialog");
                 }
 
-                rollDice.setClickable(false);
                 endRoundButton.setClickable(true);
                 mortgageButton.setClickable(true);
                 buyStadiumButton.setClickable(true);
@@ -208,15 +209,26 @@ public class GameActivity extends AppCompatActivity {
         endRoundButton = (Button) findViewById(R.id.endRoundButton);
         endRoundButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                gameController.endTurn();
-                rollDice.setClickable(true);
+
                 endRoundButton.setClickable(false);
                 mortgageButton.setClickable(false);
                 buyStadiumButton.setClickable(false);
                 upgradeStadiumButton.setClickable(false);
+
+                gameController.endTurn();
+
+                while (!gameController.isCurrentPlayerHuman()) {
+                    gameController.startTurn();
+                }
+
+                rollDice.setClickable(true);
             }
         });
+
         endRoundButton.setClickable(false);
+        mortgageButton.setClickable(false);
+        buyStadiumButton.setClickable(false);
+        upgradeStadiumButton.setClickable(false);
 
     }
 
@@ -245,6 +257,12 @@ public class GameActivity extends AppCompatActivity {
         hide();
 
         loadInterface();
+
+        while (!gameController.isCurrentPlayerHuman()) {
+            gameController.startTurn();
+        }
+
+        rollDice.setClickable(true);
 
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away

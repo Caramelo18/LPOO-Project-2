@@ -60,10 +60,33 @@ public class GameController {
         return currentPlayer;
     }
 
-    public int rollDice()
-    {
+    /**
+     * Starts the turn, deciding which function to call based on player being human or not
+     * @return 0 if player is human and doesn't land on a new Stadium
+     *         1 if player is human and lands on a new Stadium
+     *         2 if player is bot
+     */
+    public int startTurn() {
         int rollValue = dice.rollDice();
-        Player player = this.playerList.get(currentPlayer).getPlayer();
+        PlayerController player = this.playerList.get(currentPlayer);
+
+        if (isCurrentPlayerHuman()) {
+            return handleHumanTurn(rollValue, player);
+        }
+        else {
+            handleBotTurn(rollValue, player);
+            return 2;
+        }
+    }
+
+    /**
+     * Handles the human player turn
+     * @param rollValue number of places to move
+     * @param playerController current player controller
+     * @return 1 if the player has landed on a new Stadium and 0 otherwise
+     */
+    private int handleHumanTurn(int rollValue, PlayerController playerController) {
+        Player player = playerController.getPlayer();
 
         if(game.playerAtJail(player))
         {
@@ -84,6 +107,38 @@ public class GameController {
 
         updateAllTexts();
         return 0;
+    }
+
+    /**
+     * Handles the bot player turn
+     * @param rollValue number of places to move
+     * @param playerController current player controller
+     */
+    private void handleBotTurn(int rollValue, PlayerController playerController) {
+
+        Player player = playerController.getPlayer();
+
+        if(game.playerAtJail(player))
+        {
+            Place jail = game.getTable().getPlace(5);
+            jail.trigger(player);
+            return;
+        }
+
+        if(this.playerList.get(currentPlayer).movePlayer(rollValue))
+        {
+            Place start = game.getTable().getPlace(0);
+            start.trigger(player);
+        }
+
+        Place currPlace = game.getTable().getPlace(player.getIndex());
+        if(!currPlace.trigger(player)) {
+            playerController.buyStadium((Stadium) currPlace);
+        }
+
+        updateAllTexts();
+        endTurn();
+        return;
     }
 
     /**
@@ -132,5 +187,13 @@ public class GameController {
         ArrayList<Stadium> stadiums = game.stadiumsOwnedBy(player.getPlayer());
         dialog.setData(stadiums, player);
         return dialog;
+    }
+
+    /**
+     * @return true if current player is human and false otherwise
+     */
+    public boolean isCurrentPlayerHuman() {
+        Player player = playerList.get(currentPlayer).getPlayer();
+        return player.isHuman();
     }
 }
