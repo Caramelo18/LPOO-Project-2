@@ -25,6 +25,7 @@ public class Game implements Serializable {
             players.add(new Player(playerNames.get(i), checkedPlayers.get(i)));
         }
 
+
     }
 
     /**
@@ -50,4 +51,39 @@ public class Game implements Serializable {
     {
         return table.playerAtJail(player);
     }
+
+    public ArrayList<Stadium> stadiumsOwnedBy(Player player)
+    {
+        ArrayList<Stadium> stadiums = new ArrayList<Stadium>();
+
+        for(int i = 0; i < table.getPlaceSize(); i++)
+        {
+            Place currPlace = table.getPlace(i);
+            if(currPlace.getClass() == Stadium.class)
+            {
+                Stadium stadium = (Stadium) currPlace;
+                if(stadium.getOwner() == player)
+                    stadiums.add(stadium);
+            }
+        }
+        return stadiums;
+    }
+
+    public ArrayList<Stadium> stadiumsNotOwnedBy(Player player)
+    {
+        ArrayList<Stadium> stadiums = new ArrayList<Stadium>();
+
+        for(int i = 0; i < table.getPlaceSize(); i++)
+        {
+            Place currPlace = table.getPlace(i);
+            if(currPlace.getClass() == Stadium.class)
+            {
+                Stadium stadium = (Stadium) currPlace;
+                if(stadium.getOwner() != player && stadium.getOwner() != null)
+                    stadiums.add(stadium);
+            }
+        }
+        return stadiums;
+    }
+
 }

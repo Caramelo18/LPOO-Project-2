@@ -71,7 +71,7 @@ public class GameController {
             return 0;
         }
 
-        if(this.playerList.get(currentPlayer).movePlayer(3))
+        if(this.playerList.get(currentPlayer).movePlayer(rollValue))
         {
             Place start = game.getTable().getPlace(0);
             start.trigger(player);

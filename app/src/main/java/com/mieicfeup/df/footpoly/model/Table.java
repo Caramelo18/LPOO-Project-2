@@ -48,6 +48,11 @@ public class Table implements Serializable {
         places.put(19, new Stadium("Estadio do Dragao", "Portugal", 500, 251));
     }
 
+    public int getPlaceSize()
+    {
+        return places.size();
+    }
+
     public Place getPlace(int index)
     {
         return places.get(index);

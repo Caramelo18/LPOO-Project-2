@@ -15,4 +15,10 @@
     <color name="listViewText">#ffffffff</color>
 
     <color name="gameBackground">#00a1d6</color>
+
+    <color name="stadiumGreen">#388E3C</color>
+    <color name="stadiumWhite">#FFFFFF</color>
+    <color name="stadiumRed">#D32F2F</color>
+    <color name="stadiumBlue">#303F9F</color>
+    <color name="stadiumBlack">#212121</color>
 </resources>
