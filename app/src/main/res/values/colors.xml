@@ -21,4 +21,6 @@
     <color name="stadiumRed">#D32F2F</color>
     <color name="stadiumBlue">#303F9F</color>
     <color name="stadiumBlack">#212121</color>
+
+    <color name="upgradeButtonColor">#E0E0E0</color>
 </resources>

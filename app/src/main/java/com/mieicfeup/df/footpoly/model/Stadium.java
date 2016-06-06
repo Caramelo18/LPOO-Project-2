@@ -70,13 +70,21 @@ public class Stadium extends Place
         this.owner = owner;
     }
 
-    public void upgradeStadium()
+    public int getUpgradeLevel()
     {
-        if(this.upgradeLevel < 2)
-        {
-            ++this.upgradeLevel;
-            owner.decBalance(this.upgradeCost);
-        }
+        return this.upgradeLevel;
+    }
+
+    public int getUpgradeCost(int level)
+    {
+        int delta = level - this.upgradeLevel;
+        return delta * this.upgradeCost;
+    }
+
+    public void upgradeStadium(int upgradeLevel)
+    {
+        if(owner.decBalance(this.getUpgradeCost(upgradeLevel)))
+            this.upgradeLevel = upgradeLevel;
     }
 
     public void setMortgaged(boolean mortgage)

@@ -9,6 +9,7 @@ import com.mieicfeup.df.footpoly.model.Player;
 import com.mieicfeup.df.footpoly.model.Stadium;
 import com.mieicfeup.df.footpoly.view.BuyStadiumDialog;
 import com.mieicfeup.df.footpoly.view.MortgageDialog;
+import com.mieicfeup.df.footpoly.view.UpgradeStadiumDialog;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -121,6 +122,15 @@ public class GameController {
         Place currPlace = game.getTable().getPlace(playerList.get(currentPlayer).getPlayer().getIndex());
         Stadium stadium = (Stadium) currPlace;
         dialog.setData(stadium, playerList.get(currentPlayer));
+        return dialog;
+    }
+
+    public UpgradeStadiumDialog showUpgradeStadiumDialog()
+    {
+        UpgradeStadiumDialog dialog = new UpgradeStadiumDialog();
+        PlayerController player = playerList.get(currentPlayer);
+        ArrayList<Stadium> stadiums = game.stadiumsOwnedBy(player.getPlayer());
+        dialog.setData(stadiums, player);
         return dialog;
     }
 }

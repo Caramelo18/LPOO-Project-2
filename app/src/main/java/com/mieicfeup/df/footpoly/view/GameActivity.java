@@ -1,6 +1,7 @@
 package com.mieicfeup.df.footpoly.view;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -193,7 +194,16 @@ public class GameActivity extends AppCompatActivity {
 
         buyStadiumButton = (Button) findViewById(R.id.buyStadiumButton);
 
+        final Context context = this;
         upgradeStadiumButton = (Button) findViewById(R.id.upgradeStadiumButton);
+        upgradeStadiumButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UpgradeStadiumDialog dialog = gameController.showUpgradeStadiumDialog();
+                dialog.setContext(context);
+                dialog.showDialog();
+            }
+        });
 
         endRoundButton = (Button) findViewById(R.id.endRoundButton);
         endRoundButton.setOnClickListener(new Button.OnClickListener() {
