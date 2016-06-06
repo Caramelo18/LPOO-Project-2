@@ -11,6 +11,7 @@ public class Luck extends Place
 {
     private FreeParking freeParking;
     private Random rand;
+    private int amount;
 
     public Luck(FreeParking freeParking)
     {
@@ -18,22 +19,29 @@ public class Luck extends Place
         rand = new Random();
     }
 
-    public boolean trigger(Player player)
+    public int getAmount()
+    {
+        return this.amount;
+    }
+
+    public dialogType trigger(Player player)
     {
         int card = rand.nextInt(10);
         int times = rand.nextInt(3) + 1;
-        int amount = 200 * times;
+        this.amount = 200 * times;
         if (card < 6) // player must play
         {
             Log.w("luck", "pay");
             freeParking.incAmount(amount);
-            return player.decBalance(amount);
+            amount = -amount;
+            player.incBalance(amount);
+            return dialogType.LUCK;
         }
         else // player will receive money
         {
             player.incBalance(amount);
             Log.w("luck", "receive");
-            return true;
+            return dialogType.LUCK;
         }
     }
 }

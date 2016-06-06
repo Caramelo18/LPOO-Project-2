@@ -8,10 +8,10 @@ import android.util.Log;
 public class StartingPoint extends Place
 {
     public StartingPoint(){}
-    public boolean trigger(Player player)
+    public dialogType trigger(Player player)
     {
         Log.w("StartingPoint", player.getName());
         player.incBalance(500);
-        return true;
+        return dialogType.NODIALOG;
     }
 }

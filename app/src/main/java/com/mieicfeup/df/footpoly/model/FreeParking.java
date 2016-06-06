@@ -18,12 +18,12 @@ public class FreeParking extends Place
     {
         this.amount += amount;
     }
-    public boolean trigger(Player player)
+    public dialogType trigger(Player player)
     {
         Log.w("FreeParking", "trigger");
         player.incBalance(amount);
         this.amount = 0;
-        return true;
+        return dialogType.NODIALOG;
     }
 }
 

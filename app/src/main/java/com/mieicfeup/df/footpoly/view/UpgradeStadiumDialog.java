@@ -65,7 +65,7 @@ public class UpgradeStadiumDialog
                     }
                 });
 
-       // builder.show();
+
         dialog = builder.create();
         dialog.show();
     }

@@ -1,13 +1,17 @@
 package com.mieicfeup.df.footpoly.controller;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.mieicfeup.df.footpoly.model.Dice;
 import com.mieicfeup.df.footpoly.model.Game;
+import com.mieicfeup.df.footpoly.model.Luck;
 import com.mieicfeup.df.footpoly.model.Place;
 import com.mieicfeup.df.footpoly.model.Player;
 import com.mieicfeup.df.footpoly.model.Stadium;
+import com.mieicfeup.df.footpoly.view.BotDialog;
 import com.mieicfeup.df.footpoly.view.BuyStadiumDialog;
+import com.mieicfeup.df.footpoly.view.LuckDialog;
 import com.mieicfeup.df.footpoly.view.MortgageDialog;
 import com.mieicfeup.df.footpoly.view.UpgradeStadiumDialog;
 
@@ -64,10 +68,11 @@ public class GameController {
      * Starts the turn, deciding which function to call based on player being human or not
      * @return 0 if player is human and doesn't land on a new Stadium
      *         1 if player is human and lands on a new Stadium
-     *         2 if player is bot
+     *         2 if player is human and lands on Luck
+     *         3 if player is bot
      */
     public int startTurn() {
-        int rollValue = dice.rollDice();
+        int rollValue = 2;//dice.rollDice();
         PlayerController player = this.playerList.get(currentPlayer);
 
         if (isCurrentPlayerHuman()) {
@@ -75,7 +80,7 @@ public class GameController {
         }
         else {
             handleBotTurn(rollValue, player);
-            return 2;
+            return 3;
         }
     }
 
@@ -83,7 +88,7 @@ public class GameController {
      * Handles the human player turn
      * @param rollValue number of places to move
      * @param playerController current player controller
-     * @return 1 if the player has landed on a new Stadium and 0 otherwise
+     * @return 1 if the player has landed on a new Stadium, 2 if landed on luck and 0 otherwise
      */
     private int handleHumanTurn(int rollValue, PlayerController playerController) {
         Player player = playerController.getPlayer();
@@ -102,8 +107,11 @@ public class GameController {
         }
 
         Place currPlace = game.getTable().getPlace(player.getIndex());
-        if(!currPlace.trigger(player))
+        Place.dialogType dialogType = currPlace.trigger(player);
+        if(dialogType.equals(Place.dialogType.BUYSTADIUM))
             return 1;
+        else if(dialogType.equals(Place.dialogType.LUCK))
+            return 2;
 
         updateAllTexts();
         return 0;
@@ -122,6 +130,8 @@ public class GameController {
         {
             Place jail = game.getTable().getPlace(5);
             jail.trigger(player);
+            String message = playerList.get(currentPlayer).getPlayer().getName() + " at jail";
+            showBotDialog(player, message);
             return;
         }
 
@@ -132,10 +142,31 @@ public class GameController {
         }
 
         Place currPlace = game.getTable().getPlace(player.getIndex());
-        if(!currPlace.trigger(player)) {
-            playerController.buyStadium((Stadium) currPlace);
-        }
+        Place.dialogType dialogType = currPlace.trigger(player);
 
+        if(dialogType.equals(Place.dialogType.BUYSTADIUM)) {
+            playerController.buyStadium((Stadium) currPlace);
+            String message = "Bot bought " + ((Stadium) currPlace).getName();
+            showBotDialog(player, message);
+        }
+        else if(dialogType.equals(Place.dialogType.LUCK))
+        {
+            Log.w("dialog type", "luck");
+            String message = "Bot in Luck place";
+            showBotDialog(player, message);
+        }
+        else
+        {
+            if(currPlace.getClass() == Stadium.class)
+            {
+                Stadium s = (Stadium) currPlace;
+                if(s.getOwner() != player)
+                {
+                    String message = "Bot paid to " + s.getOwner().getName() + " on " + s.getName();
+                    showBotDialog(player, message);
+                }
+            }
+        }
         updateAllTexts();
         endTurn();
         return;
@@ -187,6 +218,23 @@ public class GameController {
         ArrayList<Stadium> stadiums = game.stadiumsOwnedBy(player.getPlayer());
         dialog.setData(stadiums, player);
         return dialog;
+    }
+
+    public LuckDialog showLuckDialog()
+    {
+        LuckDialog dialog = new LuckDialog();
+        Luck luck = game.getTable().getLuck();
+        int amount = luck.getAmount();
+        PlayerController player = playerList.get(currentPlayer);
+        dialog.setData(amount, player);
+        return dialog;
+    }
+
+    public void showBotDialog(Player player, String botMessage)
+    {
+        BotDialog dialog = new BotDialog();
+        dialog.setData(player, botMessage);
+        dialog.showDialog();
     }
 
     /**

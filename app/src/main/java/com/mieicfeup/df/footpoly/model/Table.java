@@ -58,6 +58,11 @@ public class Table implements Serializable {
         return this.jail;
     }
 
+    public Luck getLuck()
+    {
+        return this.luck;
+    }
+
     public Place getPlace(int index)
     {
         return places.get(index);
