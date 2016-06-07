@@ -44,6 +44,9 @@ public class GameController {
 
     }
 
+    /**
+     * Shuffles players to randomize playing order
+     */
     public void shufflePlayers()
     {
         if (game.isNewGame()) {
@@ -213,12 +216,19 @@ public class GameController {
         playerList.get(currentPlayer).strokeText();
     }
 
+    /**
+     * Updates all players textviews containing player name and balance
+     */
     private void updateAllTexts()
     {
         for(int i = 0; i < playerList.size(); i++)
             playerList.get(i).updateText();
     }
 
+    /**
+     * Sets a new MortgageDialog
+     * @return MortgageDialog generated
+     */
     public MortgageDialog showMortgageDialog() {
         MortgageDialog dialog = new MortgageDialog();
         Bundle args = new Bundle();
@@ -230,6 +240,10 @@ public class GameController {
         return dialog;
     }
 
+    /**
+     * Sets a new BuyStadiumDialog
+     * @return BuyStadiumDialog generated
+     */
     public BuyStadiumDialog showBuyStadiumDialog()
     {
         BuyStadiumDialog dialog = new BuyStadiumDialog();
@@ -239,6 +253,10 @@ public class GameController {
         return dialog;
     }
 
+    /**
+     * Sets a new UpgradeStadiumDialog
+     * @return UpgradeStadiumDialog generated
+     */
     public UpgradeStadiumDialog showUpgradeStadiumDialog()
     {
         UpgradeStadiumDialog dialog = new UpgradeStadiumDialog();
@@ -248,6 +266,10 @@ public class GameController {
         return dialog;
     }
 
+    /**
+     * Sets a new LuckDialog
+     * @return LuckDialog generated
+     */
     public LuckDialog showLuckDialog()
     {
         LuckDialog dialog = new LuckDialog();
@@ -258,6 +280,11 @@ public class GameController {
         return dialog;
     }
 
+    /**
+     * Shows a new BotDialog
+     * @param player bot player
+     * @param botMessage message to display
+     */
     private void showBotDialog(Player player, String botMessage)
     {
         BotDialog dialog = new BotDialog();
@@ -265,6 +292,9 @@ public class GameController {
         dialog.showDialog();
     }
 
+    /**
+     * Shows a dialog with the winner name
+     */
     private void showWinner()
     {
         Player winner = game.getWinner();
@@ -277,7 +307,7 @@ public class GameController {
     }
 
     /**
-     * @return true if current player is human and false otherwise
+     * @return true if current player is human, false otherwise
      */
     public boolean isCurrentPlayerHuman() {
         Player player = playerList.get(currentPlayer).getPlayer();
