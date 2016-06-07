@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class Player implements Serializable
 {
+    private static final long serialVersionUID = -3237874103546203476L;
     private String name;
     private int balance;
     private int index;

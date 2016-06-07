@@ -1,6 +1,5 @@
 package com.mieicfeup.df.footpoly.model;
 
-import android.util.Log;
 import android.util.SparseBooleanArray;
 
 import java.io.Serializable;
@@ -11,6 +10,7 @@ import java.util.ArrayList;
  */
 public class Game implements Serializable {
 
+    private static final long serialVersionUID = -9052951549344457625L;
     private ArrayList<Player> players;
     private Table table;
     private boolean gameEnded;
