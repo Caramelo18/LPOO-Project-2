@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -151,7 +152,9 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchGame(v);
+                humanPlayers = playersList.getCheckedItemPositions();
+                if(getNumHumans() > 0)
+                    launchGame(v);
             }
         });
 
@@ -191,6 +194,7 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
                     playersNames.add("Player " + String.valueOf(i));
                 }
                 adapter.notifyDataSetChanged();
+                humanPlayers = new SparseBooleanArray(numPlayers);
             }
 
             @Override
@@ -224,6 +228,7 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 humanPlayers = playersList.getCheckedItemPositions();
+                Log.w("size", String.valueOf(getNumHumans()));
             }
         });
 
@@ -302,5 +307,14 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra("game", game);
         this.startActivity(intent);
+    }
+
+    public int getNumHumans()
+    {
+        int num = 0;
+        for(int i = 0; i < humanPlayers.size(); i++)
+            if(humanPlayers.get(i))
+                num++;
+        return num;
     }
 }
