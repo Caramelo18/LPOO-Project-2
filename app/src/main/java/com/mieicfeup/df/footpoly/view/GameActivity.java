@@ -101,9 +101,6 @@ public class GameActivity extends AppCompatActivity {
 
     private ImageView tableIm;
 
-    private ArrayList<ImageView> playerImages;
-    private ArrayList<TextView> playerText;
-
     private Button menuButton;
     private Button exitButton;
 
@@ -123,8 +120,8 @@ public class GameActivity extends AppCompatActivity {
         final Context context = this;
         final Context appContext = this.getApplicationContext();
 
-        playerImages = new ArrayList<ImageView>();
-        playerText = new ArrayList<TextView>();
+        ArrayList<ImageView> playerImages = new ArrayList<>();
+        ArrayList<TextView> playerText = new ArrayList<>();
 
         for (int i = 1; i <= gameController.getPlayerList().size(); i++)
         {
@@ -316,11 +313,6 @@ public class GameActivity extends AppCompatActivity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 
     @Override

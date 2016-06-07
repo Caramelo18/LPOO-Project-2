@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Game implements Serializable {
 
     private static final long serialVersionUID = -9052951549344457625L;
-    private int currentPlayeController;
+    private int currentPlayerController;
     private ArrayList<Player> players;
     private Table table;
     private boolean gameEnded;
@@ -22,9 +22,9 @@ public class Game implements Serializable {
      * @param checkedPlayers SparseBooleanArray containing whether its human or not
      */
     public Game(ArrayList<String> playerNames, SparseBooleanArray checkedPlayers) {
-        this.players = new ArrayList<Player>();
+        this.players = new ArrayList<>();
         this.table = new Table();
-        this.currentPlayeController = 0;
+        this.currentPlayerController = 0;
 
         for (int i = 0; i < playerNames.size(); i++) {
             players.add(new Player(playerNames.get(i), checkedPlayers.get(i)));
@@ -59,15 +59,15 @@ public class Game implements Serializable {
     /**
      * @return player controller index
      */
-    public int getCurrentPlayeController() {
-        return currentPlayeController;
+    public int getCurrentPlayerController() {
+        return currentPlayerController;
     }
 
     /**
-     * @param currentPlayeController player controller index
+     * @param currentPlayerController player controller index
      */
-    public void setCurrentPlayeController(int currentPlayeController) {
-        this.currentPlayeController = currentPlayeController;
+    public void setCurrentPlayerController(int currentPlayerController) {
+        this.currentPlayerController = currentPlayerController;
     }
 
 
@@ -78,7 +78,7 @@ public class Game implements Serializable {
      */
     public ArrayList<Stadium> stadiumsOwnedBy(Player player)
     {
-        ArrayList<Stadium> stadiums = new ArrayList<Stadium>();
+        ArrayList<Stadium> stadiums = new ArrayList<>();
 
         for(int i = 0; i < table.getPlaceSize(); i++)
         {
@@ -100,7 +100,7 @@ public class Game implements Serializable {
      */
     public ArrayList<Stadium> stadiumsNotOwnedBy(Player player)
     {
-        ArrayList<Stadium> stadiums = new ArrayList<Stadium>();
+        ArrayList<Stadium> stadiums = new ArrayList<>();
 
         for(int i = 0; i < table.getPlaceSize(); i++)
         {
@@ -123,12 +123,12 @@ public class Game implements Serializable {
     public ArrayList<Stadium> upgradableStadiums(Player player)
     {
         ArrayList<Stadium> ownedBy = stadiumsOwnedBy(player);
-        ArrayList<Stadium> upgradable = new ArrayList<Stadium>();
-        ArrayList<String> countriesChecked = new ArrayList<String>();
+        ArrayList<Stadium> upgradable = new ArrayList<>();
+        ArrayList<String> countriesChecked = new ArrayList<>();
 
         for(int i = 0; i < ownedBy.size(); i++)
         {
-            ArrayList<Stadium> sameCountry = new ArrayList<Stadium>();
+            ArrayList<Stadium> sameCountry = new ArrayList<>();
             if(!countriesChecked.contains(ownedBy.get(i).getCountry()))
             {
                 sameCountry.add(ownedBy.get(i));

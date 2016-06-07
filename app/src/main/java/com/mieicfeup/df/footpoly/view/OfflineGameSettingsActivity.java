@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -103,9 +104,7 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
     };
 
     private int numPlayers;
-    private Button playButton;
     private ListView playersList;
-    private SeekBar players;
     private ArrayList<String> playersNames;
     private ArrayAdapter<String> adapter;
     private SparseBooleanArray humanPlayers;
@@ -148,7 +147,7 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
             }
         });
 
-        playButton = (Button) findViewById(R.id.playButton);
+        Button playButton = (Button) findViewById(R.id.playButton);
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,9 +158,9 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
         });
 
         playersList  = (ListView) findViewById(R.id.playerList);
-        playersList.setChoiceMode(playersList.CHOICE_MODE_MULTIPLE);
+        playersList.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
 
-        playersNames = new ArrayList<String>();
+        playersNames = new ArrayList<>();
         playersNames.add("Player 1");
         playersNames.add("Player 2");
 
@@ -182,7 +181,7 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
         humanPlayers.put(0, true);
         playersList.setItemChecked(0, true);
 
-        players = (SeekBar) findViewById(R.id.numPlayers);
+        SeekBar players = (SeekBar) findViewById(R.id.numPlayers);
 
         players.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

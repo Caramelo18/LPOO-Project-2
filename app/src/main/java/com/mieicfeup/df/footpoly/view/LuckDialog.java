@@ -35,9 +35,7 @@ public class LuckDialog extends DialogFragment
         else
             builder.setMessage("You paid " + Math.abs(amount) + " for supporters bad behaviour.");
 
-        Dialog dialog = builder.create();
-
-        return dialog;
+        return builder.create();
     }
 
     @Override

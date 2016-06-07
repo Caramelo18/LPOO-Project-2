@@ -22,7 +22,7 @@ public class BotDialog
 
     public void setContext(Context context)
     {
-        this.context = context;
+        BotDialog.context = context;
     }
 
     public void setData(Player player, String message)

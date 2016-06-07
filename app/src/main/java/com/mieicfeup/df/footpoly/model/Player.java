@@ -41,7 +41,7 @@ public class Player implements Serializable
      */
     public boolean updateBankrupt()
     {
-        if(this.balance < 0 && this.bankrupt == false)
+        if(this.balance < 0 && !this.bankrupt)
         {
             this.bankrupt = true;
             return true;

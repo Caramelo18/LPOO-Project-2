@@ -146,13 +146,11 @@ public class Stadium extends Place
         {
             owner.incBalance(this.cost);
             this.mortgaged = true;
-            return;
         }
         else if(!mortgage && this.mortgaged)
         {
             if(owner.decBalance(this.cost))
                 this.mortgaged = false;
-            return;
         }
     }
 

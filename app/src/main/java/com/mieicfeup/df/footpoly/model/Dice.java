@@ -23,7 +23,6 @@ public class Dice
      */
     public int rollDice()
     {
-        int res = rand.nextInt(6) + 1;
-        return res;
+        return rand.nextInt(6) + 1;
     }
 }

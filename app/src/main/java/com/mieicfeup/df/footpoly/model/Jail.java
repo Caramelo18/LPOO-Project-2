@@ -17,8 +17,8 @@ public class Jail extends Place
      */
     public Jail()
     {
-        players = new ArrayList<Player>();
-        remainingTurns = new ArrayList<Integer>();
+        players = new ArrayList<>();
+        remainingTurns = new ArrayList<>();
     }
 
     /**

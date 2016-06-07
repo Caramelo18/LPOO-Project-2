@@ -38,7 +38,7 @@ public class PlayerController
         }
     }
 
-    public enum moveTo {NONE, START, GOTOJAIL};
+    public enum moveTo {NONE, START, GOTOJAIL}
 
     private Player player;
     private ImageView playerImage;

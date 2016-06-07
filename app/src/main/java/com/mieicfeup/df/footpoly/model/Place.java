@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public abstract class Place implements Serializable
 {
-    public enum dialogType {NODIALOG, BUYSTADIUM, LUCK};
+    public enum dialogType {NODIALOG, BUYSTADIUM, LUCK}
+
     public abstract dialogType trigger(Player player);
 }

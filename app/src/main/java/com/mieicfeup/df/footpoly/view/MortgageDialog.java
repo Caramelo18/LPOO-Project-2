@@ -9,7 +9,6 @@ import android.util.Log;
 
 import com.mieicfeup.df.footpoly.R;
 import com.mieicfeup.df.footpoly.controller.PlayerController;
-import com.mieicfeup.df.footpoly.model.Player;
 import com.mieicfeup.df.footpoly.model.Stadium;
 
 import java.util.ArrayList;
@@ -33,8 +32,8 @@ public class MortgageDialog extends DialogFragment {
 
         final ArrayList<Integer> mSelectedItems = new ArrayList();
 
-        ArrayList<String> stadiumNames = new ArrayList<String>();
-        ArrayList<Integer> stadiumMortgage = new ArrayList<Integer>();
+        ArrayList<String> stadiumNames = new ArrayList<>();
+        ArrayList<Integer> stadiumMortgage = new ArrayList<>();
         checkedArray = new boolean[stadiumList.size()];
 
         for (int i = 0; i < stadiumList.size();i++)
@@ -42,10 +41,7 @@ public class MortgageDialog extends DialogFragment {
             Stadium stadium = stadiumList.get(i);
             stadiumNames.add(stadium.getName());
             stadiumMortgage.add(stadium.getCost());
-            if(stadium.getMortgaged())
-                checkedArray[i] = true;
-            else
-                checkedArray[i] = false;
+            checkedArray[i] = stadium.getMortgaged();
         }
 
         String[] tempArray = new String[stadiumNames.size()];

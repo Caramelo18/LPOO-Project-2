@@ -193,7 +193,7 @@ public class GameTests
         s.setOwner(p1);
 
         ArrayList<Stadium> returned = game.stadiumsOwnedBy(p1);
-        ArrayList<Stadium> owned = new ArrayList<Stadium>();
+        ArrayList<Stadium> owned = new ArrayList<>();
         owned.add(s);
 
         assertEquals(returned, owned);
@@ -217,7 +217,7 @@ public class GameTests
         s.setOwner(p2);
 
         ArrayList<Stadium> returned = game.stadiumsNotOwnedBy(p1);
-        ArrayList<Stadium> notOwned = new ArrayList<Stadium>();
+        ArrayList<Stadium> notOwned = new ArrayList<>();
         notOwned.add(s);
 
         assertEquals(returned, notOwned);
