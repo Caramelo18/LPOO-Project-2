@@ -71,18 +71,31 @@ public class GameController {
      *         1 if player is human and lands on a new Stadium
      *         2 if player is human and lands on Luck
      *         3 if player is bot
+     *         4 if game has ended
      */
     public int startTurn() {
-        int rollValue = dice.rollDice();
-        PlayerController player = this.playerList.get(currentPlayer);
-
-        if (isCurrentPlayerHuman()) {
-            return handleHumanTurn(rollValue, player);
+        if(!game.getGameEnded())
+        {
+            int rollValue = 4;//dice.rollDice();
+            PlayerController player = this.playerList.get(currentPlayer);
+            boolean bankrupt = player.getPlayer().isBankrupt();
+            Log.w( player.getPlayer().getName(), String.valueOf(player.getPlayer().getBalance()));
+            if(!bankrupt)
+            {
+                if (isCurrentPlayerHuman()) {
+                    game.updateGameStatus();
+                    return handleHumanTurn(rollValue, player);
+                } else {
+                    handleBotTurn(rollValue, player);
+                    game.updateGameStatus();
+                    return 3;
+                }
+            }
+            else
+                endTurn();
         }
-        else {
-            handleBotTurn(rollValue, player);
-            return 3;
-        }
+        showWinner();
+        return 4;
     }
 
     /**
@@ -144,6 +157,7 @@ public class GameController {
             jail.trigger(player);
             String message = playerList.get(currentPlayer).getPlayer().getName() + " at jail";
             showBotDialog(player, message);
+            endTurn();
             return;
         }
 
@@ -250,6 +264,17 @@ public class GameController {
         BotDialog dialog = new BotDialog();
         dialog.setData(player, botMessage);
         dialog.showDialog();
+    }
+
+    public void showWinner()
+    {
+        Player winner = game.getWinner();
+        String message;
+        if(winner.isHuman())
+            message = winner.getName() + " won the game. Congratulations!";
+        else
+            message = winner.getName() + " won the game.";
+        showBotDialog(winner, message);
     }
 
     /**

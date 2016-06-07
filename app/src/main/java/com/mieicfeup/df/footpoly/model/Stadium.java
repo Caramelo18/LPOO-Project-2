@@ -121,8 +121,14 @@ public class Stadium extends Place
             return dialogType.BUYSTADIUM;
 
         int amount = this.getRent();
+        int balance = player.getBalance();
         if(!player.decBalance(amount))
+        {
+            player.incBalance(-balance - 1);
+            owner.incBalance(balance);
             return dialogType.NODIALOG;
+        }
+
         owner.incBalance(amount);
         return dialogType.NODIALOG;
     }

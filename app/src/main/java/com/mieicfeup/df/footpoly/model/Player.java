@@ -14,22 +14,9 @@ public class Player implements Serializable
     private Boolean bankrupt;
 
     /**
-     * @return true if player is bankrupt and false otherwise
-     */
-    public Boolean isBankrupt() {
-        return bankrupt;
-    }
-
-    /**
-     * @param bankrupt sets player as bankrupt if true
-     */
-    public void setBankrupt(Boolean bankrupt) {
-        this.bankrupt = bankrupt;
-    }
-
-    /**
      * Player Constructor
      * @param name player name
+     * @param isHuman is player human
      */
     public Player(String name, Boolean isHuman)
     {
@@ -39,6 +26,33 @@ public class Player implements Serializable
         this.isHuman = isHuman;
         this.bankrupt = false;
     }
+
+    /**
+     * @return true if player is bankrupt and false otherwise
+     */
+    public Boolean isBankrupt() {
+        return bankrupt;
+    }
+
+    /**
+     * Updates the player bankrupt
+     * @return returns true if player is now bankrupt
+     */
+    public boolean updateBankrupt()
+    {
+        if(this.balance < 0 && this.bankrupt == false)
+        {
+            this.bankrupt = true;
+            return true;
+        }
+        else if(this.balance >= 0)
+        {
+            this.bankrupt = false;
+            return false;
+        }
+        return false;
+    }
+
 
     /**
      * @return true if player is human and false otherwise
@@ -78,6 +92,11 @@ public class Player implements Serializable
         return balance;
     }
 
+    /**
+     * Decreases amount in player balance if possible
+     * @param amount amount to decrease
+     * @return true if decreased successfully, false otherwise
+     */
     public boolean decBalance(int amount)
     {
         if(amount > this.balance)
@@ -87,6 +106,10 @@ public class Player implements Serializable
         return true;
     }
 
+    /**
+     * Increases player balance by parameter amount
+     * @param amount amount to increase
+     */
     public void incBalance(int amount)
     {
         this.balance += amount;

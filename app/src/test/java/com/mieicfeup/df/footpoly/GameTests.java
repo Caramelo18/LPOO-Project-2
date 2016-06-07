@@ -222,4 +222,35 @@ public class GameTests
 
         assertEquals(returned, notOwned);
     }
+
+    @Test
+    public void testGameEnd() throws Exception
+    {
+        ArrayList<String> names = new ArrayList<>();
+        names.add("Player 1");
+        names.add("Player 2");
+        SparseBooleanArray humans = new SparseBooleanArray();
+        humans.append(0, true);
+        humans.append(1, true);
+        Game game = new Game(names, humans);
+
+        Player p1 = game.getPlayers().get(0);
+        Player p2 = game.getPlayers().get(1);
+
+        assertEquals(game.getGameEnded(), false);
+
+        Stadium s = (Stadium) game.getTable().getPlace(4);
+        s.setOwner(p1);
+        s = (Stadium) game.getTable().getPlace(3);
+        s.setOwner(p1);
+
+        p1.incBalance(-5100);
+        assertEquals((p1.getBalance() < 0), true);
+
+        game.updateGameStatus();
+        assertEquals(game.getGameEnded(), true);
+
+        assertEquals(game.stadiumsOwnedBy(p1).size(), 0);
+
+    }
 }

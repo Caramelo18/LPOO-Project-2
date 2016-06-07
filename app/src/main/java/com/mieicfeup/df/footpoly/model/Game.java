@@ -13,6 +13,7 @@ public class Game implements Serializable {
 
     private ArrayList<Player> players;
     private Table table;
+    private boolean gameEnded;
 
     /**
      * Game Constructor
@@ -24,6 +25,7 @@ public class Game implements Serializable {
         for (int i = 0; i < playerNames.size(); i++) {
             players.add(new Player(playerNames.get(i), checkedPlayers.get(i)));
         }
+        this.gameEnded = false;
     }
 
     /**
@@ -50,6 +52,11 @@ public class Game implements Serializable {
         return table.playerAtJail(player);
     }
 
+    /**
+     * Returns an Arraylist of stadiums owned by player
+     * @param player player to check
+     * @return an ArrayList of Stadiums owned by player
+     */
     public ArrayList<Stadium> stadiumsOwnedBy(Player player)
     {
         ArrayList<Stadium> stadiums = new ArrayList<Stadium>();
@@ -67,6 +74,11 @@ public class Game implements Serializable {
         return stadiums;
     }
 
+    /**
+     * Returns an Arraylist of stadiums owned by other players than player
+     * @param player player to check
+     * @return an ArrayList of Stadiums owned by other players than player
+     */
     public ArrayList<Stadium> stadiumsNotOwnedBy(Player player)
     {
         ArrayList<Stadium> stadiums = new ArrayList<Stadium>();
@@ -84,6 +96,11 @@ public class Game implements Serializable {
         return stadiums;
     }
 
+    /**
+     * Returns an Arraylist of stadiums owned by player and upgradable (stadiums whom
+     * @param player player to check
+     * @return an ArrayList of Stadiums owned by player
+     */
     public ArrayList<Stadium> upgradableStadiums(Player player)
     {
         ArrayList<Stadium> ownedBy = stadiumsOwnedBy(player);
@@ -111,4 +128,47 @@ public class Game implements Serializable {
         return upgradable;
     }
 
+    public boolean getGameEnded()
+    {
+        return this.gameEnded;
+    }
+
+    public void updateGameStatus()
+    {
+        int numAlive = 0;
+        for(int i = 0; i < players.size(); i++)
+        {
+            if(players.get(i).updateBankrupt())
+                removePlayerStadiums(players.get(i));
+            if(!players.get(i).isBankrupt())
+                numAlive++;
+        }
+
+        if(numAlive <= 1)
+            this.gameEnded = true;
+    }
+
+    private void removePlayerStadiums(Player player)
+    {
+        for(int i = 0; i < table.getPlaceSize(); i++)
+        {
+            Place currPlace = table.getPlace(i);
+            if(currPlace.getClass() == Stadium.class)
+            {
+                Stadium stadium = (Stadium) currPlace;
+                if(stadium.getOwner() == player)
+                    stadium.setOwner(null);
+            }
+        }
+    }
+
+    public Player getWinner()
+    {
+        for(int i = 0; i < players.size(); i++)
+        {
+            if(!players.get(i).isBankrupt())
+                return players.get(i);
+        }
+        return null;
+    }
 }
