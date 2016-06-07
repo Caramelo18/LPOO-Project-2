@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,7 @@ import android.widget.TextView;
 
 import com.mieicfeup.df.footpoly.R;
 import com.mieicfeup.df.footpoly.controller.GameController;
-import com.mieicfeup.df.footpoly.controller.ScreenInfo;
+import com.mieicfeup.df.footpoly.controller.PlayerController;
 import com.mieicfeup.df.footpoly.model.Game;
 
 import java.util.ArrayList;
@@ -130,17 +131,43 @@ public class GameActivity extends AppCompatActivity {
             int resId = getResources().getIdentifier("pino" + String.valueOf(i), "id", getPackageName());
             ImageView tmpImg = (ImageView) findViewById(resId);
 
+            PlayerController currPlayer = gameController.getPlayerList().get(i - 1);
+
             resId = getResources().getIdentifier("pino" + String.valueOf(i), "drawable", getPackageName());
             tmpImg.setImageResource(resId);
             playerImages.add(tmpImg);
 
+            int imageSize = metrics.widthPixels / 12;
+
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) tmpImg.getLayoutParams();
-            params.width = metrics.widthPixels / 12 - 2;
-            params.height = metrics.widthPixels / 12 - 2;
+            params.width = imageSize - 2;
+            params.height = imageSize - 2;
             if (i == 2 || i == 4)
-                params.leftMargin = metrics.widthPixels / 12 - 1;
+                params.leftMargin = imageSize - 1;
             if (i == 3 || i == 4)
-                params.topMargin = metrics.widthPixels / 12 - 1;
+                params.topMargin = imageSize - 1;
+
+            int startingPosition = currPlayer.getPlayer().getIndex();
+
+            Log.w("Starting Position", Integer.toString(startingPosition));
+
+            int squareSize = imageSize * 2;
+
+            if (startingPosition <= 5) {
+                params.leftMargin += squareSize * startingPosition;
+            }
+            else if (startingPosition <= 10) {
+                params.leftMargin += squareSize * 5;
+                params.topMargin += squareSize * (startingPosition - 5);
+            }
+            else if (startingPosition <= 15) {
+                params.leftMargin += squareSize * (15 - startingPosition);
+                params.topMargin += squareSize * 5;
+            }
+            else {
+                params.topMargin += squareSize * (20 - startingPosition);
+            }
+
             tmpImg.setLayoutParams(params);
 
             gameController.getPlayerList().get(i - 1).setImage(tmpImg);
@@ -149,8 +176,8 @@ public class GameActivity extends AppCompatActivity {
             TextView tmpTxt = (TextView) findViewById(resId);
             playerText.add(tmpTxt);
 
-            gameController.getPlayerList().get(i - 1).setText(tmpTxt);
-            gameController.getPlayerList().get(i - 1).updateText();
+            currPlayer.setText(tmpTxt);
+            currPlayer.updateText();
         }
 
         gameController.shufflePlayers();
@@ -160,7 +187,6 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 MenuDialog dialog = new MenuDialog();
                 dialog.setContext(context);
-                dialog.setAppContext(appContext);
                 dialog.setGameController(gameController );
                 dialog.showDialog();
             }
@@ -189,6 +215,7 @@ public class GameActivity extends AppCompatActivity {
                 mortgageButton.setClickable(true);
                 buyStadiumButton.setClickable(true);
                 upgradeStadiumButton.setClickable(true);
+                menuButton.setClickable(true);
             }
         });
 
@@ -203,6 +230,16 @@ public class GameActivity extends AppCompatActivity {
         });
 
         buyStadiumButton = (Button) findViewById(R.id.buyStadiumButton);
+        buyStadiumButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BuyStadiumDialog dialog = gameController.showBuyStadiumDialog();
+                if (dialog.getStadium().getOwner() == null) {
+                    dialog.setContext(context);
+                    dialog.show(getFragmentManager(), "dialog");
+                }
+            }
+        });
 
         upgradeStadiumButton = (Button) findViewById(R.id.upgradeStadiumButton);
         upgradeStadiumButton.setOnClickListener(new View.OnClickListener() {
@@ -222,6 +259,7 @@ public class GameActivity extends AppCompatActivity {
                 mortgageButton.setClickable(false);
                 buyStadiumButton.setClickable(false);
                 upgradeStadiumButton.setClickable(false);
+                menuButton.setClickable(false);
 
                 gameController.endTurn();
 
@@ -237,6 +275,7 @@ public class GameActivity extends AppCompatActivity {
         mortgageButton.setClickable(false);
         buyStadiumButton.setClickable(false);
         upgradeStadiumButton.setClickable(false);
+        menuButton.setClickable(false);
 
         BotDialog botDialog = new BotDialog();
         botDialog.setContext(this);
@@ -261,7 +300,6 @@ public class GameActivity extends AppCompatActivity {
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
 
-        ScreenInfo screenInfo = new ScreenInfo(getApplicationContext().getResources().getDisplayMetrics().density);
         Game game = (Game) getIntent().getSerializableExtra("game");
         this.gameController = new GameController(game);
 

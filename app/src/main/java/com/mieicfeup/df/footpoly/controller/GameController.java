@@ -35,7 +35,7 @@ public class GameController {
     public GameController(Game game) {
         this.game = game;
         this.dice = new Dice();
-        this.currentPlayer = 0;
+        this.currentPlayer = game.getCurrentPlayeController();
         this.playerList = new ArrayList<PlayerController>();
 
         for (int i = 0; i < game.getPlayers().size(); i++) {
@@ -209,6 +209,8 @@ public class GameController {
             currentPlayer = 0;
         else
             currentPlayer++;
+
+        game.setCurrentPlayeController(currentPlayer);
 
         playerList.get(currentPlayer).strokeText();
     }

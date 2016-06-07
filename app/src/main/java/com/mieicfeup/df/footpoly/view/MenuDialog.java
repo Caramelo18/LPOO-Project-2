@@ -17,7 +17,6 @@ import java.io.ObjectOutputStream;
  */
 public class MenuDialog {
     private Context context;
-    private Context appContext;
     private AlertDialog.Builder builder;
     private AlertDialog dialog;
     private GameController gameController;
@@ -30,10 +29,6 @@ public class MenuDialog {
     public void setContext(Context context)
     {
         this.context = context;
-    }
-
-    public void setAppContext(Context appContext) {
-        this.appContext = appContext;
     }
 
     public void setGameController(GameController gameController) {
@@ -63,7 +58,7 @@ public class MenuDialog {
                                 showInstructions();
                                 break;
                             case 2:
-                                saveGame("teste");
+                                saveGame();
                                 break;
                             case 3:
                                 backToMenu();
@@ -80,9 +75,9 @@ public class MenuDialog {
 
     }
 
-    public void saveGame(String name) {
+    public void saveGame() {
         try {
-            FileOutputStream fileOutputStream = appContext.openFileOutput(name, Context.MODE_PRIVATE);
+            FileOutputStream fileOutputStream = context.openFileOutput("savedGame", Context.MODE_PRIVATE);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(gameController.getGame());
             objectOutputStream.close();

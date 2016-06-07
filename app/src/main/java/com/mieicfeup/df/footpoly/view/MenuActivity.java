@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -219,7 +218,7 @@ public class MenuActivity extends AppCompatActivity {
     {
         Game game = null;
         try {
-            FileInputStream fileInputStream = this.getApplicationContext().openFileInput("teste");
+            FileInputStream fileInputStream = this.getApplicationContext().openFileInput("savedGame");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             game = (Game) objectInputStream.readObject();
             objectInputStream.close();
@@ -230,8 +229,6 @@ public class MenuActivity extends AppCompatActivity {
         catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-        Log.w("Acabou o jogo", Boolean.toString(game.getGameEnded()));
 
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra("game", game);

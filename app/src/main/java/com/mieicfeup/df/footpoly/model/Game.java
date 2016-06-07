@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class Game implements Serializable {
 
     private static final long serialVersionUID = -9052951549344457625L;
+    private int currentPlayeController;
     private ArrayList<Player> players;
     private Table table;
     private boolean gameEnded;
@@ -23,6 +24,7 @@ public class Game implements Serializable {
     public Game(ArrayList<String> playerNames, SparseBooleanArray checkedPlayers) {
         this.players = new ArrayList<Player>();
         this.table = new Table();
+        this.currentPlayeController = 0;
 
         for (int i = 0; i < playerNames.size(); i++) {
             players.add(new Player(playerNames.get(i), checkedPlayers.get(i)));
@@ -53,6 +55,21 @@ public class Game implements Serializable {
     {
         return table.playerAtJail(player);
     }
+
+    /**
+     * @return player controller index
+     */
+    public int getCurrentPlayeController() {
+        return currentPlayeController;
+    }
+
+    /**
+     * @param currentPlayeController player controller index
+     */
+    public void setCurrentPlayeController(int currentPlayeController) {
+        this.currentPlayeController = currentPlayeController;
+    }
+
 
     /**
      * Returns an Arraylist of stadiums owned by player

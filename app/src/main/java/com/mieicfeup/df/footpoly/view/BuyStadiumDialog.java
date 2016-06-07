@@ -6,7 +6,6 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -106,6 +105,10 @@ public class BuyStadiumDialog extends DialogFragment
             return getResources().getColor(R.color.stadiumBlue);
         else
             return getResources().getColor(R.color.stadiumGreen);
+    }
+
+    public Stadium getStadium() {
+        return stadium;
     }
 
     private void notEnoughMoney() {
