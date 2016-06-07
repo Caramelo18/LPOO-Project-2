@@ -46,8 +46,14 @@ public class GameController {
 
     public void shufflePlayers()
     {
-        Collections.shuffle(playerList);
-        playerList.get(0).strokeText();
+        if (game.isNewGame()) {
+            Collections.shuffle(playerList);
+            playerList.get(0).strokeText();
+            game.setNewGame();
+        }
+        else {
+            endTurn();
+        }
     }
 
     /**

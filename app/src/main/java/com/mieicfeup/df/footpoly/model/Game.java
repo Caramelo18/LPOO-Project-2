@@ -15,6 +15,7 @@ public class Game implements Serializable {
     private ArrayList<Player> players;
     private final Table table;
     private boolean gameEnded;
+    private boolean newGame;
 
     /**
      * Game Constructor
@@ -25,6 +26,7 @@ public class Game implements Serializable {
         this.players = new ArrayList<>();
         this.table = new Table();
         this.currentPlayerController = 0;
+        this.newGame = true;
 
         for (int i = 0; i < playerNames.size(); i++) {
             players.add(new Player(playerNames.get(i), checkedPlayers.get(i)));
@@ -44,6 +46,20 @@ public class Game implements Serializable {
      */
     public Table getTable() {
         return table;
+    }
+
+    /**
+     * Sets newGame as false
+     */
+    public void setNewGame() {
+        newGame = false;
+    }
+
+    /**
+     * @return newGame
+     */
+    public boolean isNewGame() {
+        return newGame;
     }
 
     /**
