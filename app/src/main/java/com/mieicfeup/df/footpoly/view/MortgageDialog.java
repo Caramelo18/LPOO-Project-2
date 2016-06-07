@@ -49,8 +49,11 @@ public class MortgageDialog extends DialogFragment {
         }
 
         String[] tempArray = new String[stadiumNames.size()];
-        tempArray = stadiumNames.toArray(tempArray);
-
+        for(int i = 0; i < stadiumNames.size(); i++)
+        {
+            String tempElement = stadiumNames.get(i) + " - Price: " + String.valueOf(stadiumList.get(i).getCost());
+            tempArray[i] = tempElement;
+        }
 
 
         // Use the Builder class for convenient dialog construction
