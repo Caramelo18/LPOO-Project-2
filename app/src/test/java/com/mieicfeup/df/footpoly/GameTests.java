@@ -2,6 +2,7 @@ package com.mieicfeup.df.footpoly;
 
 import android.util.SparseBooleanArray;
 
+import com.mieicfeup.df.footpoly.controller.PlayerController;
 import com.mieicfeup.df.footpoly.model.Dice;
 import com.mieicfeup.df.footpoly.model.Game;
 import com.mieicfeup.df.footpoly.model.Luck;
@@ -14,7 +15,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 
 /**
@@ -253,4 +253,21 @@ public class GameTests
         assertEquals(game.stadiumsOwnedBy(p1).size(), 0);
 
     }
+
+    @Test
+    public void testBuyStadium()  {
+        Player player = new Player("Jogador", false);
+        PlayerController playerController = new PlayerController(player);
+
+        Stadium stadium = new Stadium("Estadio", "Pais", player.getBalance() - 1, 100);
+
+        assertEquals(playerController.buyStadium(stadium), true);
+        assertEquals(stadium.getOwner(), player);
+
+        Stadium stadium2 = new Stadium("Estadio 2", "Pais", player.getBalance() + 1, 100);
+
+        assertEquals(playerController.buyStadium(stadium2), false);
+        assertNotEquals(stadium2.getOwner(), player);
+    }
+
 }

@@ -43,13 +43,15 @@ public class PlayerController
     private Player player;
     private ImageView playerImage;
     private TextView playerText;
-    private int movement;
 
+    /**
+     * Constructor
+     * @param player the correspondent player
+     */
     public PlayerController(Player player) {
         this.player = player;
-        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
-        this.movement = metrics.widthPixels / 6;
     }
+
     /**
      * @return player
      */
@@ -58,28 +60,40 @@ public class PlayerController
     }
 
     /**
-     * @param playerImage
+     * @param playerImage ImageView representing the player token
      */
     public void setImage(ImageView playerImage) {
         this.playerImage = playerImage;
     }
 
+    /**
+     * @param playerText
+     */
     public void setText(TextView playerText)
     {
         this.playerText = playerText;
     }
 
+    /**
+     * Updates the TextView with the player name and balance
+     */
     public void updateText()
     {
         String newText = player.getName() + ": " + player.getBalance();
         playerText.setText(newText);
     }
 
+    /**
+     * Clears the stroke around the TextView
+     */
     public void clearStroke()
     {
         playerText.setBackgroundResource(0);
     }
 
+    /**
+     * Draws a stroke around the TextView
+     */
     public void strokeText()
     {
         GradientDrawable gd = new GradientDrawable();
@@ -131,6 +145,9 @@ public class PlayerController
     private boolean addAnimationToSet(AnimationSet set, long startingOffset, WrapInt xDist, WrapInt yDist, int inc) {
         boolean throughStart = false;
         long animDuration = 200;
+
+        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+        int movement = metrics.widthPixels / 6;
 
         int xValue = xDist.getValue();
         int yValue = yDist.getValue();
