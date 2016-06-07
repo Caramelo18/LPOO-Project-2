@@ -36,7 +36,7 @@ public class LuckDialog extends DialogFragment
         else
             builder.setMessage("You paid " + Math.abs(amount) + " for supporters bad behaviour.");
 
-        builder.setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 

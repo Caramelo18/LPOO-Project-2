@@ -42,6 +42,18 @@ public class Jail extends Place
     }
 
     /**
+     * @param player player
+     * @return Number of turns player still has to be in jail for
+     */
+    public Integer getRemainingTurns(Player player) {
+        int playerIndex = players.indexOf(player);
+        if (playerIndex == -1)
+            return 0;
+        else
+            return remainingTurns.get(playerIndex);
+    }
+
+    /**
      * Decreases number of turns remaining of a player if it is in jail or releases the player from jail if there are no turns remaining
      * @param player player to check
      * @return no dialog enum

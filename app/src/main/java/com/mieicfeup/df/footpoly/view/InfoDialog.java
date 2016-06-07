@@ -9,7 +9,7 @@ import com.mieicfeup.df.footpoly.model.Player;
 /**
  * Created by fabio on 06/06/2016.
  */
-public class BotDialog
+public class InfoDialog
 {
     private Player player;
     private String message;
@@ -17,7 +17,7 @@ public class BotDialog
 
     public void setContext(Context context)
     {
-        BotDialog.context = context;
+        InfoDialog.context = context;
     }
 
     public void setData(Player player, String message)

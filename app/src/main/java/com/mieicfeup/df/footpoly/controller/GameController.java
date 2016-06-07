@@ -10,7 +10,7 @@ import com.mieicfeup.df.footpoly.model.Luck;
 import com.mieicfeup.df.footpoly.model.Place;
 import com.mieicfeup.df.footpoly.model.Player;
 import com.mieicfeup.df.footpoly.model.Stadium;
-import com.mieicfeup.df.footpoly.view.BotDialog;
+import com.mieicfeup.df.footpoly.view.InfoDialog;
 import com.mieicfeup.df.footpoly.view.BuyStadiumDialog;
 import com.mieicfeup.df.footpoly.view.LuckDialog;
 import com.mieicfeup.df.footpoly.view.MortgageDialog;
@@ -112,6 +112,7 @@ public class GameController {
             Place jail = game.getTable().getPlace(5);
             jail.trigger(player);
             Log.w("at jail", player.getName());
+            showJailDialog(player, game.getTable().getJail());
             return 0;
         }
 
@@ -286,8 +287,19 @@ public class GameController {
      */
     private void showBotDialog(Player player, String botMessage)
     {
-        BotDialog dialog = new BotDialog();
+        InfoDialog dialog = new InfoDialog();
         dialog.setData(player, botMessage);
+        dialog.showDialog();
+    }
+
+    /** Indicates that the player is in jail and the remaining turns
+     * @param player Player
+     * @param jail Jail
+     */
+    private void showJailDialog(Player player, Jail jail)
+    {
+        InfoDialog dialog = new InfoDialog();
+        dialog.setData(player, "You're in jail for the next " + jail.getRemainingTurns(player) + " turns.");
         dialog.showDialog();
     }
 

@@ -269,8 +269,8 @@ public class GameActivity extends AppCompatActivity {
         upgradeStadiumButton.setClickable(false);
         menuButton.setClickable(false);
 
-        BotDialog botDialog = new BotDialog();
-        botDialog.setContext(this);
+        InfoDialog infoDialog = new InfoDialog();
+        infoDialog.setContext(this);
 
     }
 
