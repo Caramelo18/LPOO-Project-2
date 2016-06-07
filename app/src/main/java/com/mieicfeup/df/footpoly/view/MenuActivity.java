@@ -208,13 +208,13 @@ public class MenuActivity extends AppCompatActivity {
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 
-    public void launchOfflineSettingsActivity(View view)
+    private void launchOfflineSettingsActivity(View view)
     {
         Intent intent = new Intent(this, OfflineGameSettingsActivity.class);
         this.startActivity(intent);
     }
 
-    public void loadGame()
+    private void loadGame()
     {
         Game game = null;
         try {
@@ -223,10 +223,7 @@ public class MenuActivity extends AppCompatActivity {
             game = (Game) objectInputStream.readObject();
             objectInputStream.close();
             fileInputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 

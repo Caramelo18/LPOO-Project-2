@@ -99,10 +99,7 @@ public class GameActivity extends AppCompatActivity {
         }
     };
 
-    private ImageView tableIm;
-
     private Button menuButton;
-    private Button exitButton;
 
     private ImageButton rollDice;
 
@@ -112,13 +109,11 @@ public class GameActivity extends AppCompatActivity {
     private Button endRoundButton;
 
     private GameController gameController;
-    private int orderIndex;
 
-    public void loadInterface()
+    private void loadInterface()
     {
         DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
         final Context context = this;
-        final Context appContext = this.getApplicationContext();
 
         ArrayList<ImageView> playerImages = new ArrayList<>();
         ArrayList<TextView> playerText = new ArrayList<>();

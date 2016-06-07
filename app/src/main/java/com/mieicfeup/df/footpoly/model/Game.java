@@ -13,7 +13,7 @@ public class Game implements Serializable {
     private static final long serialVersionUID = -9052951549344457625L;
     private int currentPlayerController;
     private ArrayList<Player> players;
-    private Table table;
+    private final Table table;
     private boolean gameEnded;
 
     /**

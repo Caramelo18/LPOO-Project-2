@@ -26,7 +26,7 @@ public class GameController {
     private int currentPlayer;
     private ArrayList<PlayerController> playerList;
     private Game game;
-    private Dice dice;
+    private final Dice dice;
 
     /**
      * Game controller constructor
@@ -35,8 +35,8 @@ public class GameController {
     public GameController(Game game) {
         this.game = game;
         this.dice = new Dice();
-        this.currentPlayer = game.getCurrentPlayeController();
-        this.playerList = new ArrayList<PlayerController>();
+        this.currentPlayer = game.getCurrentPlayerController();
+        this.playerList = new ArrayList<>();
 
         for (int i = 0; i < game.getPlayers().size(); i++) {
             playerList.add(i, new PlayerController(game.getPlayers().get(i)));
@@ -55,13 +55,6 @@ public class GameController {
      */
     public ArrayList<PlayerController> getPlayerList() {
         return playerList;
-    }
-
-    /**
-     * @return current player index
-     */
-    public int getCurrentPlayer() {
-        return currentPlayer;
     }
 
     /**
@@ -197,7 +190,6 @@ public class GameController {
         }
         updateAllTexts();
         endTurn();
-        return;
     }
 
     /**
@@ -210,12 +202,12 @@ public class GameController {
         else
             currentPlayer++;
 
-        game.setCurrentPlayeController(currentPlayer);
+        game.setCurrentPlayerController(currentPlayer);
 
         playerList.get(currentPlayer).strokeText();
     }
 
-    public void updateAllTexts()
+    private void updateAllTexts()
     {
         for(int i = 0; i < playerList.size(); i++)
             playerList.get(i).updateText();
@@ -260,14 +252,14 @@ public class GameController {
         return dialog;
     }
 
-    public void showBotDialog(Player player, String botMessage)
+    private void showBotDialog(Player player, String botMessage)
     {
         BotDialog dialog = new BotDialog();
         dialog.setData(player, botMessage);
         dialog.showDialog();
     }
 
-    public void showWinner()
+    private void showWinner()
     {
         Player winner = game.getWinner();
         String message;

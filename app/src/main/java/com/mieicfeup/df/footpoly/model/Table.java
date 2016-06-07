@@ -7,10 +7,10 @@ import java.util.LinkedHashMap;
  * Created by fabio on 01/05/2016.
  */
 public class Table implements Serializable {
-    LinkedHashMap<Integer, Place> places = new LinkedHashMap();
-    FreeParking freeParking;
-    Jail jail;
-    Luck luck;
+    private final LinkedHashMap<Integer, Place> places = new LinkedHashMap();
+    private final FreeParking freeParking;
+    private final Jail jail;
+    private final Luck luck;
 
     /**
      * Builds a table

@@ -8,11 +8,11 @@ import android.util.Log;
 public class Stadium extends Place
 {
     private Player owner;
-    private String name;
-    private String country;
-    private int cost;
-    private int rent;
-    private int upgradeCost;
+    private final String name;
+    private final String country;
+    private final int cost;
+    private final int rent;
+    private final int upgradeCost;
     private int upgradeLevel;
     private boolean mortgaged;
 

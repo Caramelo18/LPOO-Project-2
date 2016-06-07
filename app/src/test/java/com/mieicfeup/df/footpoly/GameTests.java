@@ -235,7 +235,6 @@ public class GameTests
         Game game = new Game(names, humans);
 
         Player p1 = game.getPlayers().get(0);
-        Player p2 = game.getPlayers().get(1);
 
         assertEquals(game.getGameEnded(), false);
 

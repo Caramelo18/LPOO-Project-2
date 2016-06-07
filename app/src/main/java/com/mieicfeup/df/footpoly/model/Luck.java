@@ -9,8 +9,8 @@ import java.util.Random;
  */
 public class Luck extends Place
 {
-    private FreeParking freeParking;
-    private Random rand;
+    private final FreeParking freeParking;
+    private final Random rand;
     private int amount;
 
     /**

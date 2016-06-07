@@ -1,14 +1,9 @@
 package com.mieicfeup.df.footpoly.view;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Bundle;
 
-import com.mieicfeup.df.footpoly.R;
-import com.mieicfeup.df.footpoly.controller.PlayerController;
 import com.mieicfeup.df.footpoly.model.Player;
 
 /**

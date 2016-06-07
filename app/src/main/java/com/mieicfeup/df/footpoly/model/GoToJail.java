@@ -7,7 +7,7 @@ import android.util.Log;
  */
 public class GoToJail extends Place
 {
-    private Jail jail;
+    private final Jail jail;
 
     /**
      * Normal constructor

@@ -85,7 +85,7 @@ public class MenuDialog {
         dialog.show();
     }
 
-    public void saveGame() {
+    private void saveGame() {
         try {
             FileOutputStream fileOutputStream = context.openFileOutput("savedGame", Context.MODE_PRIVATE);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -97,7 +97,7 @@ public class MenuDialog {
         }
     }
 
-    public void backToMenu()
+    private void backToMenu()
     {
         Activity activity = (Activity) context;
         Intent intent = new Intent(activity, MenuActivity.class);

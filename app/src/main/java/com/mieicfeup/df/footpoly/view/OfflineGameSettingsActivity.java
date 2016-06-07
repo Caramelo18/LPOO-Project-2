@@ -300,7 +300,7 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
         hide();
     }
 
-    public void launchGame(View view)
+    private void launchGame(View view)
     {
         Game game = new Game(playersNames, humanPlayers);
         Intent intent = new Intent(this, GameActivity.class);
@@ -308,7 +308,7 @@ public class OfflineGameSettingsActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
-    public int getNumHumans()
+    private int getNumHumans()
     {
         int num = 0;
         for(int i = 0; i < humanPlayers.size(); i++)

@@ -95,16 +95,18 @@ public class BuyStadiumDialog extends DialogFragment
 
     private int getStadiumColor()
     {
-        if(this.stadium.getCountry().equals("England"))
-            return getResources().getColor(R.color.stadiumWhite);
-        else if(this.stadium.getCountry().equals("Spain"))
-            return getResources().getColor(R.color.stadiumRed);
-        else if(this.stadium.getCountry().equals("Germany"))
-            return getResources().getColor(R.color.stadiumBlack);
-        else if(this.stadium.getCountry().equals("Italy"))
-            return getResources().getColor(R.color.stadiumBlue);
-        else
-            return getResources().getColor(R.color.stadiumGreen);
+        switch (this.stadium.getCountry()) {
+            case "England":
+                return getResources().getColor(R.color.stadiumWhite);
+            case "Spain":
+                return getResources().getColor(R.color.stadiumRed);
+            case "Germany":
+                return getResources().getColor(R.color.stadiumBlack);
+            case "Italy":
+                return getResources().getColor(R.color.stadiumBlue);
+            default:
+                return getResources().getColor(R.color.stadiumGreen);
+        }
     }
 
     public Stadium getStadium() {

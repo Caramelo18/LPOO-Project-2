@@ -40,7 +40,7 @@ public class PlayerController
 
     public enum moveTo {NONE, START, GOTOJAIL}
 
-    private Player player;
+    private final Player player;
     private ImageView playerImage;
     private TextView playerText;
 
@@ -67,7 +67,7 @@ public class PlayerController
     }
 
     /**
-     * @param playerText
+     * @param playerText TextView representing the player name and balance
      */
     public void setText(TextView playerText)
     {
