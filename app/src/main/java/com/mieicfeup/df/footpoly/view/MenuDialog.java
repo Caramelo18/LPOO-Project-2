@@ -1,8 +1,10 @@
 package com.mieicfeup.df.footpoly.view;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 
 import com.mieicfeup.df.footpoly.controller.GameController;
 
@@ -41,20 +43,32 @@ public class MenuDialog {
     public void showDialog () {
         builder = new AlertDialog.Builder(context);
 
-        final String[] optionList = new String[3];
+        final String[] optionList = new String[4];
 
-        optionList[0] = "Instructions";
-        optionList[1] = "Save Game";
-        optionList[2] = "Return to Game";
+        optionList[0] = "Resume Game";
+        optionList[1] = "Instructions";
+        optionList[2] = "Save Game";
+        optionList[3] = "Main Menu";
+
 
         builder.setTitle("Menu")
                 .setItems(optionList, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (which == 0)
-                            showInstructions();
-                        else if (which == 1)
-                            saveGame("teste");
+                        switch (which)
+                        {
+                            case 0:
+                                dialog.dismiss();
+                            case 1:
+                                showInstructions();
+                                break;
+                            case 2:
+                                saveGame("teste");
+                                break;
+                            case 3:
+                                backToMenu();
+                                break;
+                        }
                     }
                 });
 
@@ -76,6 +90,14 @@ public class MenuDialog {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void backToMenu()
+    {
+        Activity activity = (Activity) context;
+        Intent intent = new Intent(activity, MenuActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        activity.startActivity(intent);
     }
 
 }

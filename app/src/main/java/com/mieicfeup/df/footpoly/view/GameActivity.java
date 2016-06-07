@@ -166,13 +166,6 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        exitButton = (Button) findViewById(R.id.exitButton);
-        exitButton.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
         rollDice = (ImageButton) findViewById(R.id.rollDice);
         rollDice.setOnClickListener(new ImageButton.OnClickListener()
         {

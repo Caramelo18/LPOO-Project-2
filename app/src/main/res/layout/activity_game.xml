@@ -53,16 +53,6 @@
                 android:id="@+id/menuButton">
             </Button>
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_weight=".25"
-                android:theme="@style/Button"
-                android:text="@string/exit"
-                android:textSize="12dp"
-                android:id="@+id/exitButton">
-            </Button>
-
         </LinearLayout>
 
         <RelativeLayout
