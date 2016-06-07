@@ -9,11 +9,20 @@ public class GoToJail extends Place
 {
     private Jail jail;
 
+    /**
+     * Normal constructor
+     * @param jail jail associated
+     */
     public GoToJail(Jail jail)
     {
         this.jail = jail;
     }
 
+    /**
+     * Adds the player to the jail
+     * @param player player to add to jail
+     * @return no dialog enum
+     */
     public dialogType trigger(Player player)
     {
         Log.w("GotoJail", "trigger");

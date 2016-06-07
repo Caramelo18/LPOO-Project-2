@@ -7,7 +7,16 @@ import android.util.Log;
  */
 public class StartingPoint extends Place
 {
+    /**
+     * Default constructor
+     */
     public StartingPoint(){}
+
+    /**
+     * Increases player balance in 500
+     * @param player player to increase
+     * @return no dialog enum
+     */
     public dialogType trigger(Player player)
     {
         Log.w("StartingPoint", player.getName());

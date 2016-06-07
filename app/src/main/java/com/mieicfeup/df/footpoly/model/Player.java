@@ -36,7 +36,7 @@ public class Player implements Serializable
     }
 
     /**
-     * Updates the player bankrupt
+     * Updates the player bankrupt state
      * @return returns true if player is now bankrupt
      */
     public boolean updateBankrupt()

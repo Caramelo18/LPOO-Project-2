@@ -13,17 +13,30 @@ public class Luck extends Place
     private Random rand;
     private int amount;
 
+    /**
+     * Normal constructor
+     * @param freeParking freeparking to deposit money
+     */
     public Luck(FreeParking freeParking)
     {
         this.freeParking = freeParking;
         rand = new Random();
     }
 
+    /**
+     * Returns the amount of the last luck trigger
+     * @return the amount of the last luck trigger
+     */
     public int getAmount()
     {
         return this.amount;
     }
 
+    /**
+     * Increases or decreases a user balance (60% and 40% respectively)
+     * @param player player to chance balance
+     * @return luck dialog enum
+     */
     public dialogType trigger(Player player)
     {
         int card = rand.nextInt(10);

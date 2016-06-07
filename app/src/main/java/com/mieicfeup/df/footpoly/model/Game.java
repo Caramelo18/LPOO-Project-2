@@ -17,6 +17,8 @@ public class Game implements Serializable {
 
     /**
      * Game Constructor
+     * @param playerNames ArrayList containing players names
+     * @param checkedPlayers SparseBooleanArray containing whether its human or not
      */
     public Game(ArrayList<String> playerNames, SparseBooleanArray checkedPlayers) {
         this.players = new ArrayList<Player>();
@@ -128,11 +130,18 @@ public class Game implements Serializable {
         return upgradable;
     }
 
+    /**
+     * Getter for gameEnded
+     * @return true if game ended, false otherwise
+     */
     public boolean getGameEnded()
     {
         return this.gameEnded;
     }
 
+    /**
+     * Updates game status by setting gameEnded if there is only one player non bankrupt
+     */
     public void updateGameStatus()
     {
         int numAlive = 0;
@@ -148,6 +157,10 @@ public class Game implements Serializable {
             this.gameEnded = true;
     }
 
+    /**
+     * Removes the owner of the stadiums owned by a player
+     * @param player player to remove stadiums
+     */
     private void removePlayerStadiums(Player player)
     {
         for(int i = 0; i < table.getPlaceSize(); i++)
@@ -162,6 +175,10 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * Returns the winner player
+     * @return the winner player
+     */
     public Player getWinner()
     {
         for(int i = 0; i < players.size(); i++)

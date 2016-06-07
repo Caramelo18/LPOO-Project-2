@@ -12,25 +12,40 @@ public class Jail extends Place
     private ArrayList<Player> players;
     private ArrayList<Integer> remainingTurns;
 
+    /**
+     * Default constructor
+     */
     public Jail()
     {
         players = new ArrayList<Player>();
         remainingTurns = new ArrayList<Integer>();
     }
 
+    /**
+     * Checks if a player is at jail
+     * @param player player to check
+     * @return true if player is at jail, false otherwise
+     */
     public boolean atJail(Player player)
     {
         return players.contains(player);
     }
 
+    /**
+     * Adds a player to jail
+     * @param player to add to jail
+     */
     public void addPlayer(Player player)
     {
         players.add(player);
         remainingTurns.add(3);
-        Log.w("players size", String.valueOf(players.size()));
-        Log.w("remaining size", String.valueOf(remainingTurns.size()));
     }
 
+    /**
+     * Decreases number of turns remaining of a player if it is in jail or releases the player from jail if there are no turns remaining
+     * @param player player to check
+     * @return no dialog enum
+     */
     public dialogType trigger(Player player)
     {
         Log.w("Jail", "trigger");
@@ -54,9 +69,6 @@ public class Jail extends Place
         {
             players.remove(player);
             remainingTurns.remove(index);
-            Log.w("after remove", player.getName());
-            Log.w("rem players size", String.valueOf(players.size()));
-            Log.w("rem remaining size", String.valueOf(remainingTurns.size()));
             return dialogType.NODIALOG;
         }
         remainingTurns.set(index, remaining);

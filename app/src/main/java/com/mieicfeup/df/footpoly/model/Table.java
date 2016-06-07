@@ -12,6 +12,9 @@ public class Table implements Serializable {
     Jail jail;
     Luck luck;
 
+    /**
+     * Builds a table
+     */
     public Table()
     {
         freeParking = new FreeParking();
@@ -48,26 +51,43 @@ public class Table implements Serializable {
         places.put(19, new Stadium("Estadio do Dragao", "Portugal", 500, 251));
     }
 
+    /**
+     * @return returns table size
+     */
     public int getPlaceSize()
     {
         return places.size();
     }
 
+    /**
+     * @return Jail place
+     */
     public Jail getJail()
     {
         return this.jail;
     }
 
+    /**
+     * @return Luck place
+     */
     public Luck getLuck()
     {
         return this.luck;
     }
 
+    /**
+     * @param index given index
+     * @return Place at a given index
+     */
     public Place getPlace(int index)
     {
         return places.get(index);
     }
 
+    /**
+     * @param player player to check at jail
+     * @return true if player is at jail, false otherwise
+     */
     public boolean playerAtJail(Player player)
     {
         return jail.atJail(player);
