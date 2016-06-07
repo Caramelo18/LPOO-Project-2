@@ -24,18 +24,6 @@ public class Game implements Serializable {
         for (int i = 0; i < playerNames.size(); i++) {
             players.add(new Player(playerNames.get(i), checkedPlayers.get(i)));
         }
-
-        Stadium s = (Stadium) table.getPlace(1);
-        s.setOwner(players.get(0));
-        s = (Stadium) table.getPlace(2);
-        s.setOwner(players.get(0));
-        s = (Stadium) table.getPlace(3);
-        s.setOwner(players.get(0));
-        s = (Stadium) table.getPlace(6);
-        s.setOwner(players.get(0));
-        s = (Stadium) table.getPlace(8);
-        s.setOwner(players.get(0));
-        upgradableStadiums(players.get(0));
     }
 
     /**
@@ -118,11 +106,6 @@ public class Game implements Serializable {
                     upgradable.addAll(sameCountry);
                 }
             }
-        }
-        Log.w("upgradable", String.valueOf(upgradable.size()));
-        for(int i = 0; i< upgradable.size(); i++)
-        {
-            Log.w("upgradable", upgradable.get(i).getName());
         }
 
         return upgradable;
