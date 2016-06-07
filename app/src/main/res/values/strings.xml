@@ -30,4 +30,6 @@
     <string name="endRound">End Round</string>
 
     <string name="title_activity_offline_game_settings">OfflineGameSettingsActivity</string>
+
+    <string name="instructionsText">"In each round you must spin the dice by clicking the button in the center of the table.\nYou can mortgage your stadiums by clicking the button and selecting the desired one(s).\nYou can upgrade a stadium if you have 2 or more stadiums of that country.\nIf you save the game, you will end your turn."</string>
 </resources>

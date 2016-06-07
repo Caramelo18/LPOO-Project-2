@@ -1,7 +1,9 @@
 package com.mieicfeup.df.footpoly.view;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 
 import com.mieicfeup.df.footpoly.R;
@@ -135,19 +138,26 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        final Activity activity = this;
         Button instructionsButton = (Button) findViewById(R.id.instructionsButton);
         instructionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog dialog;
-                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
-                builder.setMessage("In each round you must spin the dice by clicking the button in the center of the table.\n" +
-                        "You can mortgage your stadiums by clicking the button and selecting the desired one(s).\n" +
-                        "You can upgrade a stadium if you have 2 or more stadiums of that country.\n" +
-                        "If you save the game, you will end your turn.");
+                String message = getResources().getString(R.string.instructionsText);
+                builder.setMessage(message);
+
+                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
                 dialog = builder.create();
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.show();
             }
         });
@@ -170,6 +180,14 @@ public class MenuActivity extends AppCompatActivity {
         // created, to briefly hint to the user that UI controls
         // are available.
         delayedHide(100);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus)
+    {
+        super.onWindowFocusChanged(hasFocus);
+        hide();
+
     }
 
     @Override

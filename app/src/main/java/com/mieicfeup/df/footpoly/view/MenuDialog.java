@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import com.mieicfeup.df.footpoly.R;
 import com.mieicfeup.df.footpoly.controller.GameController;
 
 import java.io.FileOutputStream;
@@ -76,11 +77,16 @@ public class MenuDialog {
         dialog.dismiss();
         builder = new AlertDialog.Builder(context);
 
-        builder.setMessage("In each round you must spin the dice by clicking the button in the center of the table.\n" +
-                "You can mortgage your stadiums by clicking the button and selecting the desired one(s).\n" +
-                "You can upgrade a stadium if you have 2 or more stadiums of that country.\n" +
-                "If you save the game, you will end your turn.");
+        String message = context.getResources().getString(R.string.instructionsText);
 
+        builder.setMessage(message);
+
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int id) {
+            dialog.dismiss();
+        }
+
+    });
         dialog = builder.create();
         dialog.show();
     }
