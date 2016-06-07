@@ -96,7 +96,6 @@ public class PlayerController
 
         boolean throughStart = false;
         AnimationSet set = new AnimationSet(false);
-        long animDuration = 200;
 
         WrapInt xDist = new WrapInt(0);
         WrapInt yDist = new WrapInt(0);
@@ -108,7 +107,6 @@ public class PlayerController
             addAnimationToSet(set, inc, xDist, yDist, 10);
 
         set.setAnimationListener(animationListener(xDist.getValue(), yDist.getValue()));
-
         playerImage.startAnimation(set);
 
         Log.w(player.getName() + " New Position", String.valueOf(this.player.getIndex()));

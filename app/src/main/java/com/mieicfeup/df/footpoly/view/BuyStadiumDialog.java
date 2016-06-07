@@ -75,9 +75,9 @@ public class BuyStadiumDialog extends DialogFragment
                     public void onClick(DialogInterface dialog, int which)
                     {
                         if (!player.buyStadium(stadium))
-                            notEnoughMoney();
-                        else
-                            player.updateText();
+                        notEnoughMoney();
+                    else
+                        player.updateText();
                     }
                 })
                 .setNegativeButton(R.string.dialogNoBuy, new DialogInterface.OnClickListener() {

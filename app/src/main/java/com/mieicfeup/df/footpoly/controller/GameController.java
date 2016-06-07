@@ -72,7 +72,7 @@ public class GameController {
      *         3 if player is bot
      */
     public int startTurn() {
-        int rollValue = 2;//dice.rollDice();
+        int rollValue = dice.rollDice();
         PlayerController player = this.playerList.get(currentPlayer);
 
         if (isCurrentPlayerHuman()) {

@@ -81,10 +81,14 @@ public class Stadium extends Place
         return delta * this.upgradeCost;
     }
 
-    public void upgradeStadium(int upgradeLevel)
+    public boolean upgradeStadium(int upgradeLevel)
     {
-        if(owner.decBalance(this.getUpgradeCost(upgradeLevel)))
+        if(owner.decBalance(this.getUpgradeCost(upgradeLevel))) {
             this.upgradeLevel = upgradeLevel;
+            return true;
+        }
+
+        return false;
     }
 
     public void setMortgaged(boolean mortgage)
