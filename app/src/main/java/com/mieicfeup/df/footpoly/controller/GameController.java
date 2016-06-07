@@ -75,7 +75,7 @@ public class GameController {
     public int startTurn() {
         if(!game.getGameEnded())
         {
-            int rollValue = 4;//dice.rollDice();
+            int rollValue = dice.rollDice();
             PlayerController player = this.playerList.get(currentPlayer);
             boolean bankrupt = player.getPlayer().isBankrupt();
             Log.w( player.getPlayer().getName(), String.valueOf(player.getPlayer().getBalance()));

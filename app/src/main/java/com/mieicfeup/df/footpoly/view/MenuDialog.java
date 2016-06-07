@@ -71,8 +71,18 @@ public class MenuDialog {
         dialog.show();
     }
 
-    private void showInstructions() {
+    private void showInstructions()
+    {
+        dialog.dismiss();
+        builder = new AlertDialog.Builder(context);
 
+        builder.setMessage("In each round you must spin the dice by clicking the button in the center of the table.\n" +
+                "You can mortgage your stadiums by clicking the button and selecting the desired one(s).\n" +
+                "You can upgrade a stadium if you have 2 or more stadiums of that country.\n" +
+                "If you save the game, you will end your turn.");
+
+        dialog = builder.create();
+        dialog.show();
     }
 
     public void saveGame() {
