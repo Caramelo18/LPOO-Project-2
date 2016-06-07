@@ -32,7 +32,7 @@ public class GameTests
         humans.append(0, true);
         humans.append(1, true);
         Game game = new Game(names, humans);
-        Dice dice = new Dice();
+        Dice dice = Dice.getDice();
 
         assertEquals(game.getPlayers().get(0).getIndex(), 0);
         game.getPlayers().get(0).incrementIndex(dice.rollDice());
