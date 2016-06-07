@@ -2,15 +2,21 @@ package com.mieicfeup.df.footpoly.view;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
 import com.mieicfeup.df.footpoly.R;
+import com.mieicfeup.df.footpoly.model.Game;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -121,6 +127,14 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        Button loadGameButton = (Button) findViewById(R.id.loadButton);
+        loadGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadGame();
+            }
+        });
+
         Button onlineButton = (Button) findViewById(R.id.onlineButton);
 
         Button optionsButton = (Button) findViewById(R.id.optionsButton);
@@ -198,6 +212,29 @@ public class MenuActivity extends AppCompatActivity {
     public void launchOfflineSettingsActivity(View view)
     {
         Intent intent = new Intent(this, OfflineGameSettingsActivity.class);
+        this.startActivity(intent);
+    }
+
+    public void loadGame()
+    {
+        Game game = null;
+        try {
+            FileInputStream fileInputStream = this.getApplicationContext().openFileInput("teste");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            game = (Game) objectInputStream.readObject();
+            objectInputStream.close();
+            fileInputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Log.w("Acabou o jogo", Boolean.toString(game.getGameEnded()));
+
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("game", game);
         this.startActivity(intent);
     }
 

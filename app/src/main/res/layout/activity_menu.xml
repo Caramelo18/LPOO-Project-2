@@ -41,7 +41,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center">
 
             <Button
@@ -51,9 +51,18 @@
                 android:text="@string/offline"
                 android:id="@+id/offlineButton"
                 android:layout_gravity="center"
-                android:layout_marginTop="100dp"
                 android:layout_centerHorizontal="true" />
 
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:theme="@style/Button"
+                android:text="@string/load"
+                android:id="@+id/loadButton"
+                android:layout_gravity="center"
+                android:layout_alignStart="@+id/offlineButton"
+                android:layout_below="@+id/offlineButton"
+                android:layout_marginTop="15dp" />
             <Button
                 android:layout_width="100dp"
                 android:layout_height="60dp"
@@ -61,10 +70,9 @@
                 android:text="@string/online"
                 android:id="@+id/onlineButton"
                 android:layout_gravity="center"
-                android:layout_alignStart="@+id/offlineButton"
-                android:layout_below="@+id/offlineButton"
+                android:layout_alignStart="@+id/loadButton"
+                android:layout_below="@+id/loadButton"
                 android:layout_marginTop="15dp" />
-
 
             <Button
                 android:layout_width="100dp"

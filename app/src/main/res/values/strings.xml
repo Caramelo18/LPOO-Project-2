@@ -5,6 +5,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
     <string name="offline">Play Offline</string>
+    <string name="load">Load Game</string>
     <string name="online">Play Online</string>
     <string name="options">Options</string>
     <string name="exit">Exit</string>

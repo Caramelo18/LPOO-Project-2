@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -121,6 +120,7 @@ public class GameActivity extends AppCompatActivity {
     {
         DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
         final Context context = this;
+        final Context appContext = this.getApplicationContext();
 
         playerImages = new ArrayList<ImageView>();
         playerText = new ArrayList<TextView>();
@@ -156,12 +156,20 @@ public class GameActivity extends AppCompatActivity {
         gameController.shufflePlayers();
 
         menuButton = (Button) findViewById(R.id.menuButton);
+        menuButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                MenuDialog dialog = new MenuDialog();
+                dialog.setContext(context);
+                dialog.setAppContext(appContext);
+                dialog.setGameController(gameController );
+                dialog.showDialog();
+            }
+        });
 
         exitButton = (Button) findViewById(R.id.exitButton);
         exitButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 finish();
-                System.exit(0);
             }
         });
 

@@ -42,7 +42,6 @@ public class GameController {
             playerList.add(i, new PlayerController(game.getPlayers().get(i)));
         }
 
-
     }
 
     public void shufflePlayers()
@@ -283,5 +282,12 @@ public class GameController {
     public boolean isCurrentPlayerHuman() {
         Player player = playerList.get(currentPlayer).getPlayer();
         return player.isHuman();
+    }
+
+    /**
+     * @return game
+     */
+    public Game getGame() {
+        return game;
     }
 }
