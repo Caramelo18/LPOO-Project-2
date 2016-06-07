@@ -1,6 +1,7 @@
 package com.mieicfeup.df.footpoly.view;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -134,9 +135,22 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        Button onlineButton = (Button) findViewById(R.id.onlineButton);
+        Button instructionsButton = (Button) findViewById(R.id.instructionsButton);
+        instructionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog dialog;
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
 
-        Button optionsButton = (Button) findViewById(R.id.optionsButton);
+                builder.setMessage("In each round you must spin the dice by clicking the button in the center of the table.\n" +
+                        "You can mortgage your stadiums by clicking the button and selecting the desired one(s).\n" +
+                        "You can upgrade a stadium if you have 2 or more stadiums of that country.\n" +
+                        "If you save the game, you will end your turn.");
+
+                dialog = builder.create();
+                dialog.show();
+            }
+        });
 
         Button exitButton = (Button) findViewById(R.id.exitButton);
         exitButton.setOnClickListener(new View.OnClickListener() {

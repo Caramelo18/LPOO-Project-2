@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import com.mieicfeup.df.footpoly.R;
 import com.mieicfeup.df.footpoly.controller.PlayerController;
 
 /**
@@ -34,6 +35,13 @@ public class LuckDialog extends DialogFragment
             builder.setMessage("You received " + amount + " for a previous mistake in court.");
         else
             builder.setMessage("You paid " + Math.abs(amount) + " for supporters bad behaviour.");
+
+        builder.setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
 
         return builder.create();
     }

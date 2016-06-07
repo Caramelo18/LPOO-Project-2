@@ -7,14 +7,22 @@ import java.util.Random;
  */
 public class Dice
 {
-    private final Random rand;
+    private final static Random rand = new Random();
+    private static Dice dice = null;
 
     /**
-     * Default constructor
+     * Private constructor, ensuring it's a Singleton
      */
-    public Dice()
-    {
-        rand = new Random();
+    private Dice() {}
+
+    /**
+     * @return Dice singleton object
+     */
+    public static Dice getDice() {
+        if(dice == null) {
+            dice = new Dice();
+        }
+        return dice;
     }
 
     /**

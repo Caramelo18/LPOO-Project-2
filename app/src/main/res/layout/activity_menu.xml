@@ -63,6 +63,8 @@
                 android:layout_alignStart="@+id/offlineButton"
                 android:layout_below="@+id/offlineButton"
                 android:layout_marginTop="15dp" />
+
+            <!--
             <Button
                 android:layout_width="100dp"
                 android:layout_height="60dp"
@@ -73,16 +75,17 @@
                 android:layout_alignStart="@+id/loadButton"
                 android:layout_below="@+id/loadButton"
                 android:layout_marginTop="15dp" />
+                -->
 
             <Button
                 android:layout_width="100dp"
                 android:layout_height="60dp"
                 android:theme="@style/Button"
-                android:text="@string/options"
-                android:id="@+id/optionsButton"
+                android:text="@string/instructions"
+                android:id="@+id/instructionsButton"
                 android:layout_gravity="center"
-                android:layout_alignStart="@+id/onlineButton"
-                android:layout_below="@+id/onlineButton"
+                android:layout_alignStart="@+id/loadButton"
+                android:layout_below="@+id/loadButton"
                 android:layout_marginTop="15dp" />
 
             <Button
@@ -92,8 +95,8 @@
                 android:text="@string/exit"
                 android:id="@+id/exitButton"
                 android:layout_gravity="center"
-                android:layout_alignStart="@+id/optionsButton"
-                android:layout_below="@+id/optionsButton"
+                android:layout_alignStart="@+id/instructionsButton"
+                android:layout_below="@+id/instructionsButton"
                 android:layout_marginTop="15dp" />
         </RelativeLayout>
     </FrameLayout>

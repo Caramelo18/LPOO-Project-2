@@ -26,7 +26,7 @@ public class GameController {
     private int currentPlayer;
     private ArrayList<PlayerController> playerList;
     private Game game;
-    private final Dice dice;
+    private static final Dice dice = Dice.getDice();
 
     /**
      * Game controller constructor
@@ -34,7 +34,6 @@ public class GameController {
      */
     public GameController(Game game) {
         this.game = game;
-        this.dice = new Dice();
         this.currentPlayer = game.getCurrentPlayerController();
         this.playerList = new ArrayList<>();
 
