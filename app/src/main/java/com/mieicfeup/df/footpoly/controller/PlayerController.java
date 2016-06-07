@@ -38,6 +38,8 @@ public class PlayerController
         }
     }
 
+    public enum moveTo {NONE, START, GOTOJAIL};
+
     private Player player;
     private ImageView playerImage;
     private TextView playerText;
@@ -92,25 +94,29 @@ public class PlayerController
      * @param inc value to increment
      * @return true if passes by starting point, false otherwise
      */
-    public boolean movePlayer(int inc) {
+    public moveTo movePlayer(int inc) {
 
-        boolean throughStart = false;
+        moveTo move = moveTo.NONE;
         AnimationSet set = new AnimationSet(false);
 
         WrapInt xDist = new WrapInt(0);
         WrapInt yDist = new WrapInt(0);
 
         if(addAnimationToSet(set, 0, xDist, yDist, inc))
-            throughStart = true;
+            move = moveTo.START;
 
         if (player.getIndex() == 15)
+        {
             addAnimationToSet(set, inc, xDist, yDist, 10);
+            move = moveTo.GOTOJAIL;
+        }
 
         set.setAnimationListener(animationListener(xDist.getValue(), yDist.getValue()));
         playerImage.startAnimation(set);
 
         Log.w(player.getName() + " New Position", String.valueOf(this.player.getIndex()));
-        return throughStart;
+
+        return move;
     }
 
     /**

@@ -102,10 +102,13 @@ public class UpgradeStadiumDialog
         upgrade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (stadium.upgradeStadium(currUpgrade))
+                if (!stadium.upgradeStadium(currUpgrade))
                     notEnoughMoney();
                 else
+                {
                     player.updateText();
+                    dialog.dismiss();
+                }
             }
         });
 

@@ -26,7 +26,7 @@ public class Jail extends Place
     public void addPlayer(Player player)
     {
         players.add(player);
-        remainingTurns.add(2);
+        remainingTurns.add(3);
         Log.w("players size", String.valueOf(players.size()));
         Log.w("remaining size", String.valueOf(remainingTurns.size()));
     }

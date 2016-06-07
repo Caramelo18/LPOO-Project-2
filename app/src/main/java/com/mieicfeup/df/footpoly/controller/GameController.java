@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.mieicfeup.df.footpoly.model.Dice;
 import com.mieicfeup.df.footpoly.model.Game;
+import com.mieicfeup.df.footpoly.model.Jail;
 import com.mieicfeup.df.footpoly.model.Luck;
 import com.mieicfeup.df.footpoly.model.Place;
 import com.mieicfeup.df.footpoly.model.Player;
@@ -97,21 +98,32 @@ public class GameController {
         {
             Place jail = game.getTable().getPlace(5);
             jail.trigger(player);
+            Log.w("at jail", player.getName());
             return 0;
         }
 
-        if(this.playerList.get(currentPlayer).movePlayer(rollValue))
+        PlayerController.moveTo target = this.playerList.get(currentPlayer).movePlayer(rollValue);
+        if(target == PlayerController.moveTo.START)
         {
             Place start = game.getTable().getPlace(0);
             start.trigger(player);
         }
+        else if(target == PlayerController.moveTo.GOTOJAIL)
+        {
+            Jail jail = game.getTable().getJail();
+            jail.addPlayer(player);
+        }
 
-        Place currPlace = game.getTable().getPlace(player.getIndex());
-        Place.dialogType dialogType = currPlace.trigger(player);
-        if(dialogType.equals(Place.dialogType.BUYSTADIUM))
-            return 1;
-        else if(dialogType.equals(Place.dialogType.LUCK))
-            return 2;
+        if(player.getIndex() != 0)
+        {
+            Place currPlace = game.getTable().getPlace(player.getIndex());
+
+            Place.dialogType dialogType = currPlace.trigger(player);
+            if (dialogType.equals(Place.dialogType.BUYSTADIUM))
+                return 1;
+            else if (dialogType.equals(Place.dialogType.LUCK))
+                return 2;
+        }
 
         updateAllTexts();
         return 0;
@@ -135,35 +147,38 @@ public class GameController {
             return;
         }
 
-        if(this.playerList.get(currentPlayer).movePlayer(rollValue))
+        PlayerController.moveTo target = this.playerList.get(currentPlayer).movePlayer(rollValue);
+        if(target == PlayerController.moveTo.START)
         {
             Place start = game.getTable().getPlace(0);
             start.trigger(player);
         }
-
-        Place currPlace = game.getTable().getPlace(player.getIndex());
-        Place.dialogType dialogType = currPlace.trigger(player);
-
-        if(dialogType.equals(Place.dialogType.BUYSTADIUM)) {
-            playerController.buyStadium((Stadium) currPlace);
-            String message = "Bot bought " + ((Stadium) currPlace).getName();
-            showBotDialog(player, message);
-        }
-        else if(dialogType.equals(Place.dialogType.LUCK))
+        else if(target == PlayerController.moveTo.GOTOJAIL)
         {
-            Log.w("dialog type", "luck");
-            String message = "Bot in Luck place";
-            showBotDialog(player, message);
+            Jail jail = game.getTable().getJail();
+            jail.addPlayer(player);
         }
-        else
+
+        if(player.getIndex() != 0)
         {
-            if(currPlace.getClass() == Stadium.class)
-            {
-                Stadium s = (Stadium) currPlace;
-                if(s.getOwner() != player)
-                {
-                    String message = "Bot paid to " + s.getOwner().getName() + " on " + s.getName();
-                    showBotDialog(player, message);
+            Place currPlace = game.getTable().getPlace(player.getIndex());
+            Place.dialogType dialogType = currPlace.trigger(player);
+
+            if (dialogType.equals(Place.dialogType.BUYSTADIUM)) {
+                playerController.buyStadium((Stadium) currPlace);
+                String message = "Bot bought " + ((Stadium) currPlace).getName();
+                showBotDialog(player, message);
+            } else if (dialogType.equals(Place.dialogType.LUCK)) {
+                Log.w("dialog type", "luck");
+                String message = "Bot in Luck place";
+                showBotDialog(player, message);
+            } else {
+                if (currPlace.getClass() == Stadium.class) {
+                    Stadium s = (Stadium) currPlace;
+                    if (s.getOwner() != player) {
+                        String message = "Bot paid to " + s.getOwner().getName() + " on " + s.getName();
+                        showBotDialog(player, message);
+                    }
                 }
             }
         }
@@ -215,7 +230,7 @@ public class GameController {
     {
         UpgradeStadiumDialog dialog = new UpgradeStadiumDialog();
         PlayerController player = playerList.get(currentPlayer);
-        ArrayList<Stadium> stadiums = game.stadiumsOwnedBy(player.getPlayer());
+        ArrayList<Stadium> stadiums = game.upgradableStadiums(player.getPlayer());
         dialog.setData(stadiums, player);
         return dialog;
     }
