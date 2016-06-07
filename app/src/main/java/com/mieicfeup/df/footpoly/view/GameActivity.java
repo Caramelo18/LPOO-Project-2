@@ -22,8 +22,6 @@ import com.mieicfeup.df.footpoly.controller.GameController;
 import com.mieicfeup.df.footpoly.controller.PlayerController;
 import com.mieicfeup.df.footpoly.model.Game;
 
-import java.util.ArrayList;
-
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
@@ -115,9 +113,6 @@ public class GameActivity extends AppCompatActivity {
         DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
         final Context context = this;
 
-        ArrayList<ImageView> playerImages = new ArrayList<>();
-        ArrayList<TextView> playerText = new ArrayList<>();
-
         for (int i = 1; i <= gameController.getPlayerList().size(); i++)
         {
             int resId = getResources().getIdentifier("pino" + String.valueOf(i), "id", getPackageName());
@@ -127,7 +122,6 @@ public class GameActivity extends AppCompatActivity {
 
             resId = getResources().getIdentifier("pino" + String.valueOf(i), "drawable", getPackageName());
             tmpImg.setImageResource(resId);
-            playerImages.add(tmpImg);
 
             int imageSize = metrics.widthPixels / 12;
 
@@ -166,7 +160,6 @@ public class GameActivity extends AppCompatActivity {
 
             resId = getResources().getIdentifier("player" + String.valueOf(i) + "Balance", "id", getPackageName());
             TextView tmpTxt = (TextView) findViewById(resId);
-            playerText.add(tmpTxt);
 
             currPlayer.setText(tmpTxt);
             currPlayer.updateText();

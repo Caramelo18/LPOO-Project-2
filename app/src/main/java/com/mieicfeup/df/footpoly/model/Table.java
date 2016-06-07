@@ -8,7 +8,6 @@ import java.util.LinkedHashMap;
  */
 public class Table implements Serializable {
     private final LinkedHashMap<Integer, Place> places = new LinkedHashMap();
-    private final FreeParking freeParking;
     private final Jail jail;
     private final Luck luck;
 
@@ -17,7 +16,7 @@ public class Table implements Serializable {
      */
     public Table()
     {
-        freeParking = new FreeParking();
+        FreeParking freeParking = new FreeParking();
         jail = new Jail();
         luck = new Luck(freeParking);
 

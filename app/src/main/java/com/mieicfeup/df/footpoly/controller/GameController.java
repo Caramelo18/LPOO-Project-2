@@ -24,13 +24,13 @@ import java.util.Collections;
  */
 public class GameController {
     private int currentPlayer;
-    private ArrayList<PlayerController> playerList;
-    private Game game;
+    private final ArrayList<PlayerController> playerList;
+    private final Game game;
     private static final Dice dice = Dice.getDice();
 
     /**
      * Game controller constructor
-     * @param game
+     * @param game game object
      */
     public GameController(Game game) {
         this.game = game;

@@ -9,8 +9,8 @@ import java.util.ArrayList;
  */
 public class Jail extends Place
 {
-    private ArrayList<Player> players;
-    private ArrayList<Integer> remainingTurns;
+    private final ArrayList<Player> players;
+    private final ArrayList<Integer> remainingTurns;
 
     /**
      * Default constructor
